@@ -1,0 +1,17 @@
+{
+  "name": "claw-motus",
+  "version": "1.0.0",
+  "description": "Claw Motus Website",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.5"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
