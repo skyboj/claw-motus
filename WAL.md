@@ -1,5 +1,23 @@
 # WAL — Project State Journal
 
+## 2026-02-20 | Session 3
+
+### Started
+- TASK-004: Fix minor front-end design bugs across different viewports
+
+### Completed
+- None yet
+
+### Decisions (and why)
+- User decided to upload media files manually at a later date. Reverting TASK-003 back to `[ ]` and skipping it for now.
+
+### Questions / REVIEW markers
+- Stopped on TASK-004. What specific design bugs need fixing across viewports?
+
+### Next
+- Proceed with TASK-004 after frontend evaluation.
+
+
 ## 2026-02-20 | Session 2
 
 ### Started

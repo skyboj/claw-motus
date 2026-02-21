@@ -194,7 +194,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             htmlEmail += `
         <br/>
         <p>Let's schedule a brief call to pin down logistics.</p>
-        <p>Best,<br/>B. Boichenko<br/><strong>Claw Motus</strong></p>
+        <p>Best,<br/>O. Boichenko<br/><strong>Claw Motus</strong></p>
       `;
 
             // 3. Send using Resend
