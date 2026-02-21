@@ -6,7 +6,10 @@
 - TASK-004: Fix minor front-end design bugs across different viewports
 
 ### Completed
-- None yet
+- TASK-004: Fix minor front-end design bugs across different viewports
+- Transformed quote layout from right-anchored sidebar into a centered floating modal with an overlay
+- Locked background body scrolling when modal is active
+- Removed Budget and Location fields from form and Javascript payload
 
 ### Decisions (and why)
 - User decided to upload media files manually at a later date. Reverting TASK-003 back to `[ ]` and skipping it for now.

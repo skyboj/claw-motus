@@ -14,12 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Toggle Panel state
     const openPanel = (e) => {
         if (e) e.preventDefault();
+        document.body.classList.add("modal-open");
         quotePanel.classList.add("open");
         fab.classList.remove("pulse");
         fab.classList.remove("show-tooltip");
     };
 
     const closePanel = () => {
+        document.body.classList.remove("modal-open");
         quotePanel.classList.remove("open");
     };
 
@@ -60,8 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
             company: formData.get("company"),
             projectType: formData.get("projectType"),
             eventDate: formData.get("eventDate"),
-            location: formData.get("location"),
-            budget: formData.get("budget"),
             description: formData.get("description")
         };
 

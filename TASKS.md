@@ -4,4 +4,4 @@
 
 ## Normal priority
 - [ ] TASK-003: Upload final production media files (replace placeholders) [SKIPPED FOR NOW]
-- [~] TASK-004: Fix minor front-end design bugs across different viewports
+- [x] TASK-004: Fix minor front-end design bugs across different viewports
