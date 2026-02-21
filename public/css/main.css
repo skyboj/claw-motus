@@ -341,6 +341,25 @@ section.panel {
   opacity: 1;
 }
 
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 390;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Quote Panel (Floating Modal) */
 .quote-panel {
   position: fixed;
@@ -356,8 +375,7 @@ section.panel {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(184, 149, 90, 0.5);
   border-radius: 12px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 0 100vw rgba(0, 0, 0, 0.5);
-  /* Fake overlay via box-shadow */
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
   z-index: 400;
   opacity: 0;
   visibility: hidden;
@@ -410,6 +428,28 @@ section.panel {
   padding: 2rem;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) rgba(255, 255, 255, 0.05);
+}
+
+.quote-form-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.quote-form-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.quote-form-container::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+
+.quote-form-container::-webkit-scrollbar-thumb:hover {
+  background: #d1aa6b;
 }
 
 .form-group {

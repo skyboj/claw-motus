@@ -11,11 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById("submit-btn");
     const successMessage = document.getElementById("success-message");
 
+    const backdrop = document.getElementById("modal-backdrop");
+
     // 1. Toggle Panel state
     const openPanel = (e) => {
         if (e) e.preventDefault();
         document.body.classList.add("modal-open");
-        if (window.lenis) window.lenis.stop(); // Stop Lenis smooth scroll overlay bug
+        backdrop.classList.add("open");
         quotePanel.classList.add("open");
         fab.classList.remove("pulse");
         fab.classList.remove("show-tooltip");
@@ -23,9 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closePanel = () => {
         document.body.classList.remove("modal-open");
-        if (window.lenis) window.lenis.start(); // Resume Lenis
+        backdrop.classList.remove("open");
         quotePanel.classList.remove("open");
     };
+
+    // Close when clicking the backdrop
+    backdrop.addEventListener("click", closePanel);
 
     fab.addEventListener("click", openPanel);
     closeBtn.addEventListener("click", closePanel);
