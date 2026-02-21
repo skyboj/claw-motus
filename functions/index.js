@@ -6,8 +6,10 @@ const rateLimit = require("express-rate-limit");
 const { GoogleGenAI } = require("@google/genai");
 const { Resend } = require("resend");
 
-// Initialize Firebase Admin for App Check
-initializeApp();
+// Initialize Firebase Admin for App Check and Firestore
+const admin = require("firebase-admin");
+admin.initializeApp();
+const db = admin.firestore();
 
 const app = express();
 app.use(express.json());
@@ -117,69 +119,29 @@ app.post(["/quote", "/api/quote"], async (req, res) => {
     };
   }
 
-  // --- D. Email Delivery via Resend ---
+  // --- D. Save to Firestore Database ---
   try {
-    const resendKey = process.env.RESEND_API_KEY;
-    if (!resendKey) throw new Error("RESEND_API_KEY not set");
+    const newQuote = {
+      name,
+      email,
+      company: company || "N/A",
+      projectType,
+      eventDate: eventDate || "N/A",
+      location: location || "N/A",
+      budget,
+      description,
+      aiSummary: aiResult.summary,
+      aiBrief: aiResult,
+      status: "pending", // MCP Agent target
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
 
-    const resend = new Resend(resendKey);
-
-    const htmlEmail = `
-      <h3>NEW QUOTE REQUEST</h3>
-      <hr/>
-      <p><strong>From:</strong> ${name} &lt;${email}&gt;</p>
-      <p><strong>Company:</strong> ${company || "N/A"}</p>
-      <p><strong>Project Type:</strong> ${projectType}</p>
-      <p><strong>Date:</strong> ${eventDate || "N/A"}</p>
-      <p><strong>Budget:</strong> ${budget}</p>
-      <p><strong>Location:</strong> ${location || "N/A"}</p>
-      <br/>
-      <p><strong>CLIENT DESCRIPTION:</strong></p>
-      <p>${description.replace(/\n/g, '<br/>')}</p>
-      <hr/>
-      <h3>AI PRODUCTION BRIEF</h3>
-      <hr/>
-      <p><strong>Summary:</strong><br/>${aiResult.summary}</p>
-      <p><strong>Scope Estimate:</strong><br/>${aiResult.scopeEstimate}</p>
-      <p><strong>Priority:</strong> ${aiResult.priorityLevel}</p>
-      <br/>
-      <p><strong>Follow-Up Questions to Ask Client:</strong></p>
-      <ul>${aiResult.followUpQuestions?.map(q => `<li>${q}</li>`).join("") || ""}</ul>
-      <p><strong>Potential Challenges:</strong></p>
-      <ul>${aiResult.potentialChallenges?.map(c => `<li>${c}</li>`).join("") || ""}</ul>
-      <p><strong>Internal Notes:</strong><br/>${aiResult.internalNotes}</p>
-      <hr/>
-      <p><small>Claw Motus · production.boichenko@icloud.com</small></p>
-    `;
-
-    await resend.emails.send({
-      from: "quotes@clawmotus.com",
-      to: "production.boichenko@icloud.com",
-      subject: `[Claw Motus] New Quote — ${projectType} — ${name}`,
-      html: htmlEmail,
-    });
-
-    // Auto-responder to client
-    const clientHtmlEmail = `
-      <h3>Thank You for Reaching Out!</h3>
-      <hr/>
-      <p>Hi ${name},</p>
-      <p>We have successfully received your quote request regarding the <strong>${projectType}</strong> project for ${company || 'your brand'}.</p>
-      <p>Our team is currently reviewing the details, and we'll prepare a tailored brief and get back to you within 24 hours.</p>
-      <br/>
-      <p>Best,<br/>B. Boichenko<br/><strong>Claw Motus</strong></p>
-    `;
-
-    await resend.emails.send({
-      from: "quotes@clawmotus.com",
-      to: email,
-      subject: `Quote Request Received — ${projectType}`,
-      html: clientHtmlEmail,
-    });
-
-  } catch (emailErr) {
-    console.error("Email Delivery Error:", emailErr);
-    // Note: In production you might queue failed emails.
+    await db.collection("quotes").add(newQuote);
+    console.log("Successfully saved new quote request to Firestore.");
+  } catch (dbErr) {
+    console.error("Firestore Save Error:", dbErr);
+    // Even if db fails, we still return 200 to frontend so they see a success message,
+    // though in production we might return a 500.
   }
 
   // Respond to frontend

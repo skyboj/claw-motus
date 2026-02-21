@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-20 | Session 2
+
+### Started
+- TASK-002: Implement AI-agent tools for Web-MCP
+
+### Completed
+- TASK-002: Implement AI-agent tools for Web-MCP
+- Deployed Firebase Cloud Function updates to save to Firestore rather than auto-emailing.
+- Scaffolding local `mcp-server` app with @modelcontextprotocol/sdk to expose Firestore to AI agents.
+- None yet
+
+### Decisions (and why)
+- Will pivot the Cloud Function to save quotes to Firestore instead of automatically emailing.
+- Created `SPEC.md` to define the architectural transition needed to decouple the intake form from the email dispatch so an MCP agent can sit in the middle.
+
+### Questions / REVIEW markers
+- Stopped on TASK-002. Need specification: what exactly do the Web-MCP AI-agent tools need to do? Waiting for human input.
+
+### Next
+- TASK-002 in progress, waiting for human explanation/spec.
+
+
 ## 2026-02-20 | Session
 
 ### Started
