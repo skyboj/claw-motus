@@ -159,6 +159,24 @@ app.post(["/quote", "/api/quote"], async (req, res) => {
       html: htmlEmail,
     });
 
+    // Auto-responder to client
+    const clientHtmlEmail = `
+      <h3>Thank You for Reaching Out!</h3>
+      <hr/>
+      <p>Hi ${name},</p>
+      <p>We have successfully received your quote request regarding the <strong>${projectType}</strong> project for ${company || 'your brand'}.</p>
+      <p>Our team is currently reviewing the details, and we'll prepare a tailored brief and get back to you within 24 hours.</p>
+      <br/>
+      <p>Best,<br/>B. Boichenko<br/><strong>Claw Motus</strong></p>
+    `;
+
+    await resend.emails.send({
+      from: "quotes@clawmotus.com",
+      to: email,
+      subject: `Quote Request Received — ${projectType}`,
+      html: clientHtmlEmail,
+    });
+
   } catch (emailErr) {
     console.error("Email Delivery Error:", emailErr);
     // Note: In production you might queue failed emails.
