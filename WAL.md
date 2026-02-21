@@ -8,7 +8,8 @@
 ### Completed
 - TASK-004: Fix minor front-end design bugs across different viewports
 - Transformed quote layout from right-anchored sidebar into a centered floating modal with an overlay
-- Locked background body scrolling when modal is active
+- Locked background body scrolling (`overflow: hidden`) when modal is active
+- **Note on why scroll lock failed the first time:** The site uses `Lenis` for smooth scroll hijacking. Standard CSS `overflow: hidden` on the `body` does not stop Lenis from intercepting mouse wheel events and translating the page coordinates. I had to explicitly export the Lenis instance to the `window` object and call `window.lenis.stop()` when opening the modal, and `.start()` when closing it.
 - Removed Budget and Location fields from form and Javascript payload
 
 ### Decisions (and why)

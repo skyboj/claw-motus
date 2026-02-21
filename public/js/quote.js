@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const openPanel = (e) => {
         if (e) e.preventDefault();
         document.body.classList.add("modal-open");
+        if (window.lenis) window.lenis.stop(); // Stop Lenis smooth scroll overlay bug
         quotePanel.classList.add("open");
         fab.classList.remove("pulse");
         fab.classList.remove("show-tooltip");
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closePanel = () => {
         document.body.classList.remove("modal-open");
+        if (window.lenis) window.lenis.start(); // Resume Lenis
         quotePanel.classList.remove("open");
     };
 
