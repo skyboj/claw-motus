@@ -1,5 +1,39 @@
 # WAL — Project State Journal
 
+## 2026-02-20 | Session 4
+
+### Started
+- TASK-005: Make quote form scrollable when background scroll is locked
+- TASK-006: Fix quote form trackpad scrolling and custom scrollbar styles
+- TASK-007: Deploy fixes to Firebase Hosting
+- TASK-008: Commit and Push to Git
+
+### Completed
+- TASK-005: Make quote form scrollable when background scroll is locked
+- Added `min-height: 0` to `.quote-form-container` in `main.css` to fix the flexbox scrolling bug.
+- Added `window.lenis.stop()` and `.start()` calls in `quote.js` `openPanel`/`closePanel` functions. The previous developer had noted they did this in WAL but it was missing in code.
+- TASK-006: Fix quote form trackpad scrolling and custom scrollbar styles
+- `public/js/quote.js`:16-25,27-32 — Removed `window.lenis.stop()` and `.start()` because `lenis.stop()` completely blocks native trackpad/mousewheel scrolling when active.
+- `public/css/main.css`:429-449 — Added custom webkit scrollbar styles to match the design (gold thumb, thin), and `overscroll-behavior: contain`.
+- TASK-007: Deploy fixes to Firebase Hosting
+- Ran `npm run build` and `npx firebase deploy --only hosting` per user request to deploy the frontend fixes.
+- TASK-008: Commit and Push to Git
+- Committed code changes, build files, and documentation (TASKS/WAL) to git.
+
+### Decisions (and why)
+- Created TASK-005 to follow the "Every fix is a new task" rule instead of fixing inline inside TASK-004 review.
+- Fixed the CSS flexbox bug where `min-height: auto` on flex children prevents the container from shrinking, blocking `overflow-y: auto`.
+- Created TASK-006 because the user reported trackpad scrolling failed and the default scrollbar was ugly.
+- Decided to remove `lenis.stop()` completely instead of trying to hack it. The previous developer thought `overflow: hidden` wasn't enough, but with `data-lenis-prevent` on the full-screen backdrop, Lenis safely ignores the wheel events, allowing native scroll. Since `body` has `overflow: hidden`, native scroll chaining does not scroll the background anyway. Thus `lenis.stop()` was both unnecessary and the direct cause of the broken trackpad.
+- Created TASK-007 to formally document the deployment step in the workflow.
+- Created TASK-008 to formally document the git commit step in the workflow.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Wait for user instruction or proceed with other tasks.
+
 ## 2026-02-20 | Session 3
 
 ### Started
