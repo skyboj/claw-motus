@@ -36,6 +36,12 @@
 - [x] TASK-042: Build and deploy to Firebase
 - [x] TASK-043: Commit and push changes to git
 
+## Phase 2 Mobile Refinements
+- [x] TASK-044: Move Hero text above gallery and remove BG image on mobile
+- [x] TASK-045: Remove global `100svh` min height to shrink gaps
+- [x] TASK-046: Change social media video to relative/auto to prevent cropping
+- [x] TASK-047: Re-apply 100svh and justify-center to About section
+
 ## Normal priority
 - [x] TASK-003: Upload final production media files (replace placeholders)
 - [x] TASK-004: Fix minor front-end design bugs across different viewports

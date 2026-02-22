@@ -1,5 +1,25 @@
 # WAL — Project State Journal
 
+## 2026-02-21 | Session 35
+
+### Started
+- TASK-039: Adjust layout for mobile so content and gallery don't overlap (Re-opened)
+
+### Completed
+- TASK-039: Adjust layout for mobile so content and gallery don't overlap
+  - `public/css/main.css`: Reconfigured the entire mobile layout stacking logic. Replaced `height: 100vh` on `section.panel` with `min-height: 100svh` and flex-start justification. Replaced `position: absolute` with `position: relative` and a fixed `55vh` height on `.bg-video-wrapper` (excluding the Hero). Removed the artificial `flex-end` alignment and margins on `.panel-content`.
+  - Re-deployed to Firebase Hosting.
+  - Committed and pushed to GitHub.
+
+### Decisions (and why)
+- The user reported that elements were still overlapping and there were awkward gaps. This happens intimately because `position: absolute` yanks the image asset out of the natural document layout flow, and forcing `height: 100vh` on dynamically sized mobile phone screens breaks predictability. By establishing a `position: relative` dedicated `55vh` block at the *top* of the flex column, the paragraph `.panel-content` block is naturally forced to flow *underneath* it, eliminating any chance of overlapping regardless of the device screen size. Using `min-height: 100svh` instead of a locked `100vh` ensures the text won't leak off the bottom on short screens, but will still perfectly fill the screen on modern browsers using small viewport units.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Inform user of the stacking layout engine changes.
+
 ## 2026-02-21 | Session 34
 
 ### Started

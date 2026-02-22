@@ -761,6 +761,8 @@ textarea.form-control {
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 #hero::before {
@@ -855,11 +857,16 @@ textarea.form-control {
 @media (max-width: 768px) {
   section.panel {
     height: auto;
-    min-height: 100svh;
+    min-height: auto;
     justify-content: flex-start;
     padding-top: var(--header-height);
     /* accommodate bottom nav */
     padding-bottom: calc(var(--bottom-nav-height) + 2rem);
+  }
+
+  #about {
+    min-height: 100svh;
+    justify-content: center;
   }
 
   .nav-links {
@@ -929,20 +936,48 @@ textarea.form-control {
     margin-bottom: 2rem;
   }
 
-  /* Don't shrink Hero gallery wrapper logic, but ensure others are relative */
-  #hero .bg-video-wrapper {
-    position: absolute;
-    height: 100%;
+  /* Push Hero content above gallery and remove specific image */
+  #hero {
+    background-image: none;
   }
 
-  .mobile-fallback-bg,
-  .mobile-bg-video {
+  #hero::before {
+    display: none;
+  }
+
+  #hero .panel-content {
+    order: 1;
+    margin-bottom: 2rem;
+  }
+
+  #hero .hero-gallery-wrapper {
+    position: relative;
+    height: 55vh;
+    min-height: 400px;
+    order: 2;
+  }
+
+  /* Let social media video dictate its own uncropped height */
+  #social-media .bg-video-wrapper {
+    height: auto;
+    min-height: auto;
+  }
+
+  .mobile-fallback-bg {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 0;
+  }
+
+  .mobile-bg-video {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
     z-index: 0;
   }
 
