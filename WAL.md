@@ -1,5 +1,37 @@
 # WAL — Project State Journal
 
+## 2026-02-21 | Session 34
+
+### Started
+- TASK-039: Adjust layout for mobile so content and gallery don't overlap
+- TASK-040: Change mobile Product section to static background image
+- TASK-041: Replace mobile social media gallery with specific videos
+- TASK-042: Build and deploy to Firebase
+- TASK-043: Commit and push changes to git
+
+### Completed
+- TASK-039: Adjust layout for mobile so content and gallery don't overlap
+  - `public/css/main.css`: Restrained `.mobile-gallery-wrapper` to the top 55% of the screen under the mobile breakpoint. Pushed `#live-events .panel-content`, `#social-media .panel-content`, and `#product-video .panel-content` down using `align-self: flex-end`.
+- TASK-040: Change mobile Product section to static background image
+  - `public/index.html`: Replaced `.mobile-gallery-wrapper` with `.mobile-fallback-bg` inside `#product-video`.
+  - `public/css/main.css`: Styled `.mobile-fallback-bg` to display on mobile as a contained `background-image`.
+- TASK-041: Replace mobile social media gallery with specific videos
+  - `public/index.html`: Added `<video class="mobile-bg-video">` to `#social-media`, pointing to `social-media mobile.webm` and `.mp4`.
+  - `public/css/main.css`: Styled `.mobile-bg-video` to display exclusively on mobile layouts.
+- TASK-042: Build and deploy to Firebase
+- TASK-043: Commit and push changes to git
+  - Added, committed, and pushed to origin.
+
+### Decisions (and why)
+- The overlapping elements on mobile devices (gallery tracking directly behind text paragraphs) caused visual interference. Rather than pushing down all components globally with `.panel-content` adjustments, I specifically targeted the 3 lower video panels to align their content to the bottom (`flex-end`), while confining the visual asset wrappers (`.mobile-gallery-wrapper`, etc.) strictly to the upper 55% of the screen. This clears up the contrast hierarchy.
+- The user requested swapping the Social Media gallery out for a newly uploaded mobile video edit `social-media mobile`, and reverting the Product section to a static image. I created two distinct layout fallback classes for mobile CSS visibility (`.mobile-fallback-bg` and `.mobile-bg-video`) to facilitate HTML tag variations gracefully under the 768px limit, maintaining desktop behaviors smoothly.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Report back to the user.
+
 ## 2026-02-21 | Session 33
 
 ### Started

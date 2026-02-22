@@ -34,7 +34,7 @@
 - [x] TASK-040: Change mobile Product section to static background image
 - [x] TASK-041: Replace mobile social media gallery with specific videos
 - [x] TASK-042: Build and deploy to Firebase
-- [ ] TASK-043: Commit and push changes to git
+- [x] TASK-043: Commit and push changes to git
 
 ## Normal priority
 - [x] TASK-003: Upload final production media files (replace placeholders)

@@ -853,6 +853,15 @@ textarea.form-control {
 }
 
 @media (max-width: 768px) {
+  section.panel {
+    height: auto;
+    min-height: 100svh;
+    justify-content: flex-start;
+    padding-top: var(--header-height);
+    /* accommodate bottom nav */
+    padding-bottom: calc(var(--bottom-nav-height) + 2rem);
+  }
+
   .nav-links {
     display: none;
     /* Add hamburger logic here if needed */
@@ -910,6 +919,22 @@ textarea.form-control {
     display: none !important;
   }
 
+  /* Restructure layout to stack instead of overlap */
+  .bg-video-wrapper {
+    position: relative;
+    width: 100%;
+    /* Allocate roughly top half for media */
+    height: 55vh;
+    min-height: 400px;
+    margin-bottom: 2rem;
+  }
+
+  /* Don't shrink Hero gallery wrapper logic, but ensure others are relative */
+  #hero .bg-video-wrapper {
+    position: absolute;
+    height: 100%;
+  }
+
   .mobile-fallback-bg,
   .mobile-bg-video {
     display: block;
@@ -934,10 +959,10 @@ textarea.form-control {
   .mobile-gallery-wrapper {
     display: flex;
     position: absolute;
-    top: 5%;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 55%;
+    height: 100%;
     overflow: hidden;
     align-items: center;
     z-index: 2;
@@ -946,11 +971,12 @@ textarea.form-control {
     /* Let clicks pass through if needed, though they don't on hero */
   }
 
+  /* We clear out the absolute positioning forced gap / overlap hacks */
   #live-events .panel-content,
   #social-media .panel-content,
   #product-video .panel-content {
-    align-self: flex-end;
-    margin-bottom: 2rem;
+    align-self: auto;
+    margin-bottom: 0;
   }
 
   .mobile-gallery-track {
