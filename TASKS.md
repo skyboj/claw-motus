@@ -42,7 +42,12 @@
 - [x] TASK-046: Change social media video to relative/auto to prevent cropping
 - [x] TASK-047: Re-apply 100svh and justify-center to About section
 
-## Normal priority
+## Phase 3 Mobile Polish
+- [x] TASK-048: Reorder Hero gallery to be visually above text
+- [x] TASK-049: Reduce top/bottom paddings to minimize gaps between sections
+- [x] TASK-050: Center Product section text over its full background image
+- [x] TASK-051: Make gallery cards untouchable on mobile
+- [x] TASK-052: Make social media video object-fit contain
 - [x] TASK-003: Upload final production media files (replace placeholders)
 - [x] TASK-004: Fix minor front-end design bugs across different viewports
 - [x] TASK-005: Make quote form scrollable when background scroll is locked (found during TASK-004)

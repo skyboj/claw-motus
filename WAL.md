@@ -1,5 +1,61 @@
 # WAL — Project State Journal
 
+## 2026-02-21 | Session 37
+
+### Started
+- Phase 3 Mobile Polish (TASK-048 to 052)
+
+### Completed
+- TASK-048: Reorder Hero gallery to be visually above text
+  - `public/css/main.css`: Changed `#hero .hero-gallery-wrapper` to `order: 1` and `#hero .panel-content` to `order: 2`.
+- TASK-049: Reduce top/bottom paddings to minimize gaps between sections
+  - `public/css/main.css`: Replaced large explicit top and bottom padding calculations in `#live-events`, `#social-media`, etc., with a fixed `padding: 2rem 0;`.
+- TASK-050: Center Product section text over its full background image
+  - `public/index.html` & `public/css/main.css`: Restored `#product-video .bg-video-wrapper` to `position: absolute; height: 100%;` and used `justify-content: center` to center the text over it.
+- TASK-051: Make gallery cards untouchable on mobile
+  - `public/css/main.css`: Added `pointer-events: none !important;` to `.mobile-gallery-wrapper` and `.hero-gallery-wrapper` during mobile widths to prevent touch scrolling disruption.
+- TASK-052: Make social media video object-fit contain
+  - `public/css/main.css`: Changed `.mobile-bg-video` from `object-fit: cover` to `contain` so it retains its full original dimensions without auto-scaling loss.
+- Pushed to Github and Deployed to Firebase Hosting.
+
+### Decisions (and why)
+- Compressing the gaps to exactly `2rem` on standard sections forces them visually into tight continuation without crushing readability, leaving only the specialized `#hero` and `#about` sections mathematically bounded to UI controls.
+- To honor the product video's static backdrop requirement effectively, centering the text with absolute positioning creates the desired "Product" title page effect naturally without disjointing the layout flow.
+- Preventing pointer events locally on the gallery tracks protects native vertical touch scrolling from jittering on gallery card interaction.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check back with the user.
+
+## 2026-02-21 | Session 36
+
+### Started
+- Phase 2 Mobile Refinements (TASK-044 to 047)
+
+### Completed
+- TASK-044: Move Hero text above gallery and remove BG image on mobile
+  - `public/css/main.css`: Hid `background-image: url('san francisco...')` and `#hero::before` specifically on mobile by setting `display: none` / `background-image: none`. Applied absolute `order: 1` to `.panel-content` and `order: 2` to `.hero-gallery-wrapper` within `#hero` to visually reverse HTML sequence rendering under flex flow direction `column`.
+- TASK-045: Remove global `100svh` min height to shrink gaps
+  - `public/css/main.css`: Removed `min-height: 100svh` globally from `section.panel` to compress gaps implicitly caused by underfilled viewports on high aspect ratio device screens.
+- TASK-046: Change social media video to relative/auto to prevent cropping
+  - `public/css/main.css`: Targeted `#social-media .bg-video-wrapper` resetting it to `height: auto`. Altered `.mobile-bg-video` global classes to allow `height: auto` over relative coordinates.
+- TASK-047: Re-apply 100svh and justify-center to About section
+  - `public/css/main.css`: Restored `min-height: 100svh` explicitly to the `#about` section by CSS ID selector. Restored text alignment using `justify-content: center`.
+- Deployed to Firebase Hosting.
+- Pushed changes to GitHub.
+
+### Decisions (and why)
+- After migrating to relative layout stacking, the `min-height: 100svh` declaration on every `.panel` forced small sections (like the 1-image static Product panel or custom Social Media video) to expand massively to fill the vertical device real-estate footprint, leading to large black vertical spacing gaps in the reading flow between content bounds and the subsequent panel triggers. Stripping this parameter naturally shrink-wraps the flexboxes to their minimal internal boundaries reducing negative space natively on variable mobile form factors while honoring the previously set bottom content margins.
+- Instead of re-building HTML duplicates per section to control rendering sequence, simple flex `order: n` parameters on mobile media queries achieve identical user-view inversion cleanly.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Inform user of build finishes.
+
 ## 2026-02-21 | Session 35
 
 ### Started
