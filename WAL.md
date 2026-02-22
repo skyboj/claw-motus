@@ -1,5 +1,521 @@
 # WAL — Project State Journal
 
+## 2026-02-21 | Session 29
+
+### Started
+- TASK-033: Build and deploy updated (smaller) gallery images to Firebase
+
+### Completed
+- TASK-033: Build and deploy updated (smaller) gallery images to Firebase
+  - Removed `public/images/old gallery` to ensure the backup 3-4MB files are not copied into `/dist` and pushed to Firebase servers.
+  - Re-compiled Vite build with the new ~800KB `hero.jpg` files and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user replaced the hero gallery images with newly compressed smaller files (dropping them from ~3.5MB to ~800KB each). Since Firebase Hosting automatically syncs and removes stale orphaned files based on the contents of the `dist` directory, all that was needed was to run a fresh build. Removing the `old gallery` directory entirely guarantees no accidental bloating of the server contents occurs.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 28
+
+### Started
+- TASK-032: Reduce Hero section background blur to 3px
+
+### Completed
+- TASK-032: Reduce Hero section background blur to 3px
+  - `public/css/main.css`: Changed `#hero::before` pseudo element `backdrop-filter: blur()` value from `10px` down to `3px`.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user requested less of an aggressive blur effect on the 95% dark Hero background. Dropped the CSS filter value down to `3px` to make the city skyline slightly sharper but still comfortably out of focus against the foreground cards.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 27
+
+### Started
+- TASK-031: Increase Hero dimming to 95% and add blur
+
+### Completed
+- TASK-031: Increase Hero dimming to 95% and add blur
+  - `public/css/main.css`: Increased `#hero::before` pseudo element `background-color` alpha channel from `0.90` to `0.95`.
+  - `public/css/main.css`: Added `backdrop-filter: blur(10px)` (and webkit prefix) to gently blur the city background through the layer.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user wanted to further decouple the foreground cards from the background image. The combination of intense 95% dimming alongside a 10px CSS blur perfectly pushes the city skyline into the distant ambiance while keeping the sharp gallery cards in complete focus.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 26
+
+### Started
+- TASK-030: Increase Hero section dimming overlay to 90%
+
+### Completed
+- TASK-030: Increase Hero section dimming overlay to 90%
+  - `public/css/main.css`: Changed `#hero::before` pseudo element `background-color` alpha channel from `0.70` to `0.90`.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user requested an even darker background for the Hero section (90%). This was achieved by updating the rgba values applied to the CSS overlay in the previous task.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 25
+
+### Started
+- TASK-029: Dim the Hero section background image by 70%
+
+### Completed
+- TASK-029: Dim the Hero section background image by 70%
+  - `public/css/main.css`: Added an `#hero::before` pseudo element with a dark (`rgba(13, 12, 10, 0.7)`) `background-color` to span the entire section.
+  - Set `z-index: 1` explicitly on `#hero .hero-gallery-wrapper` and `#hero .panel-content` to ensure they sit above the new dimming overlay.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user requested to dim the newly exposed background image by 70% so it wouldn't overpower the foreground content. Using a `::before` pseudo element on the `#hero` root block is the cleanest approach, as it precisely targets that specific background imagery without affecting the opacity of inner text elements or flex wrappers.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 24
+
+### Started
+- TASK-028: Fix Hero section background image visibility
+
+### Completed
+- TASK-028: Fix Hero section background image visibility
+  - `public/css/main.css`: Changed `.hero-gallery-wrapper` `background-color` to `transparent` (was hardcoded to `var(--bg-dark)`) to stop it from occluding the parent `#hero`'s San Francisco background image.
+  - `public/css/main.css`: Hid `.video-overlay` within `.hero-gallery-wrapper` (display: none) to remove the linear-gradient darken overlay as requested.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user reported the image wasn't visible. After further inspection, the flex-box `.hero-gallery-wrapper` wrapping div held a solid `--bg-dark` background color, and inside it ran a `.video-overlay` gradient box. Both of these blocked the newly applied background from `#hero` from bleeding through. Switching the wrapper to transparent explicitly fixed it.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 23
+
+### Started
+- TASK-027: Add San Francisco background image to the Hero section
+
+### Completed
+- TASK-027: Add San Francisco background image to the Hero section
+  - `public/css/main.css`: Applied `san francisco.webp` as the `background-image` for `.hero-gallery-wrapper`.
+  - Kept no dark overlay (`rgba(13, 12, 10, ...)` pseudo element) per user instruction "don't do the main contact transparent".
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user requested that the San Francisco background be applied exclusively to the Hero section natively without darkening the content. I achieved this by appending `background-image` to the existing `.hero-gallery-wrapper` CSS definition, which sits beneath the image gallery track but above the page `body`.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 22
+
+### Started
+- TASK-026: Add background image to Quote Hook section
+
+### Completed
+- TASK-026: Add background image to Quote Hook section
+  - `public/css/main.css`: Added the `get a quote.webp` image as a background to the `#quote-panel-hook` section.
+  - Added an `::before` pseudo-element with a black `rgba(13, 12, 10, 0.65)` dark overlay to maintain text legibility.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- Followed the exact same CSS structure implemented in TASK-025 for the `#about` section to apply the newly discovered `get a quote.webp` background to the Quote hook area.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 21
+
+### Started
+- TASK-025: Move San Francisco background from global grain wrap exclusively to #about section
+
+### Completed
+- TASK-025: Move San Francisco background from global grain wrap exclusively to #about section
+  - `public/css/main.css`: Reverted `.grain-overlay` to not include `san francisco.webp`.
+  - `public/css/main.css`: Added the `san francisco.webp` image specifically to `#about` section using `background-image`.
+  - Added an `::before` pseudo-element with a black `rgba(13, 12, 10, 0.75)` dark overlay to `#about` to maintain text legibility over the image.
+
+### Decisions (and why)
+- The user expressed dissatisfaction with the global application of the picture to the entire website via the grain overlay and instructed to limit it to the About section implicitly connected with the Quote form context. Removing from the fixed overlay and putting exactly into the `section.panel#about` DOM CSS rule perfectly locks the picture into one scroll stop.
+- Added a 75% dark tint overlay pseudo element, because otherwise the white text over the brightly colored SF picture becomes completely illegible.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 20
+
+### Started
+- TASK-024: Deploy frontend fixes (slideshows, background, scroll fix) to Firebase Hosting
+
+### Completed
+- TASK-024: Deploy frontend fixes (slideshows, background, scroll fix) to Firebase Hosting
+  - Ran `npm run build` to generate the Vite production bundle including new `san francisco.webp` image and modified `main.css`/`main.js`.
+  - Ran `npx firebase deploy --only hosting` to upload the `dist` folder to Firebase.
+  - Deployment confirmed successful.
+
+### Decisions (and why)
+- Followed standard build and deployment procedure to push frontend modifications live.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 19
+
+### Started
+- TASK-023: Set new San Francisco image as global background
+
+### Completed
+- TASK-023: Set new San Francisco image as global background
+  - Updated `.grain-overlay` in `main.css` to include `url('../images/san francisco.webp')` as a secondary background layer.
+  - Set `background-size: auto, cover` so the grain repeats and the image fills the screen.
+  - Increased opacity slightly to `0.12` so the image is visible yet remains a subtle backdrop.
+
+### Decisions (and why)
+- Used the existing fixed `.grain-overlay` `div` which already spans the entire screen and sits behind the content (`z-index: 100` but `pointer-events: none`). This efficiently solves the requirement for both desktop and mobile without introducing new complex DOM placement or additional JS observers.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 18
+
+### Started
+- TASK-022: Remove scroll snapping behavior (moves site backward unexpectedly)
+
+### Completed
+- TASK-022: Remove scroll snapping behavior (moves site backward unexpectedly)
+  - `public/js/main.js`: removed GSAP ScrollTrigger import, `gsap.registerPlugin()`, and the `ScrollTrigger.create` block that enforced `snapTo` on section panels.
+
+### Decisions (and why)
+- The user reported the site moving backward unexpectedly. This is a direct side effect of `ScrollTrigger`'s `snap` configuration which aggressively tries to magnetize the viewport to specific sections when scrolling pauses.
+- Removing this logic leaves only the Lenis smooth scrolling configuration, restoring the natural, precise scrolling movement mapped to the user's explicit scroll wheel/trackpad.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 17
+
+### Started
+- TASK-021: Implement mobile slideshows using WEBP posters for video sections
+
+### Completed
+- TASK-021: Implement mobile slideshows using WEBP posters for video sections
+  - Added `.mobile-slideshow` and `.ms-slide` logic to `main.css` mapped within the `@media (max-width: 768px)` mobile media query.
+  - Used pure CSS keyframe animations (`fade-4` and `fade-7`) staggered with `animation-delay` to create elegant continuous crossfades between the WEBP posters.
+  - Added the corresponding HTML markup into `index.html` inside each `.bg-video-wrapper` leveraging the `.webp` images in the `images/` directory.
+  - Set `.bg-video` to `display: none !important` on mobile to override the desktop video layout.
+
+### Decisions (and why)
+- Chose pure CSS keyframe animations for the slideshow fading instead of writing any JavaScript. This stays absolutely true to the "minimal footprint rule" and ensures snappy mobile device performance.
+- The `product-video` section only had one poster (`product-poster.webp`), so it received a single-slide static version that semantically matches the `.ms-slide` HTML logic but doesn't actually crossfade.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check user input or proceed with remaining TASKS.md priorities.
+
+## 2026-02-21 | Session 16
+
+### Started
+- TASK-020: Restore WebM sources and deploy updated video assets
+
+### Completed
+- TASK-020: Restore WebM sources and deploy updated video assets
+  - Restored `<source src="/videos/*.webm">` tags to `index.html` for all three video sections (`live-events`, `social-media`, `product-video`).
+  - Ran Vite build. The newly provided `.webm` files were correctly hashed and bundled into the `dist` directory.
+  - Redeployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user provided properly optimized updated `.webm` files for `social-media` and `live-events`, and requested them explicitly. We restored the `.webm` `<source>` tags back into `index.html` to optimize bandwidth for modern browsers.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-020
+
+## 2026-02-21 | Session 15
+
+### Started
+- TASK-019: Make hero gallery pictures 10% larger and overlap
+
+### Completed
+- TASK-019: Make hero gallery pictures 10% larger and overlap
+  - Increased `.gallery-card` size by 10% to 286x374px in `main.css`.
+  - Removed `gap` from `.hero-gallery-track`.
+  - Added `margin-left: -30px` to `.gallery-card:not(:first-child)` to create a precise overlapping deck effect.
+  - Added `padding-left: 20px` wrapper buffer for the leftmost card.
+  - Adjusted animation logic to use exact visual track widths: `transform: translateX(-1792px)` to maintain a truly seamless loop without a 25px visual skipping gap.
+  - Set `.gallery-card` to push hovered elements to `z-index: 30; position: relative` preventing right-side neighbours from burying the hover state overlap.
+  - Redeployed to Firebase.
+
+### Decisions (and why)
+- Multiply original card width (260px) and height (340px) by 1.1x -> 286x374.
+- CSS flexbox `gap` does not support negative values for overlapping. I will remove `gap`, use `margin-left: -30px` on all cards after the first one to create overlap seamlessly.
+- Calculated exact scroll translation logic: the sequence of 7 cards repeating with `-30px` margins and `286px` width creates an exact footprint of `1792px` per set. Used `translateX(-1792px)` rather than `calc(-50%)` to avoid a 25px jump gap caused by the missing negative left-margin on the very first card in the list.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-019
+
+## 2026-02-21 | Session 14
+
+### Started
+- TASK-018: Force browser to use updated MP4 by removing outdated WebM sources
+
+### Completed
+- TASK-018: Force browser to use updated MP4 by removing outdated WebM sources
+  - Deleted `<source src="*.webm">` tags from the `<video>` elements in `index.html` for the `live-events`, `social-media`, and `product` sections.
+  - Ran `rm public/videos/*.webm` to clean up the workspace.
+  - Rebuilt and deployed the project.
+
+### Decisions (and why)
+- The browser was serving the old `.webm` video because it was naturally preferring the `.webm` `<source>` tag over the `.mp4` `<source>` tag if supported (e.g., Chrome). By removing the `.webm` sources altogether, we force the browser to immediately load the newly replaced `.mp4` files. We did this for all video sections to preemptively prevent this issue from happening again if the client replaces the other video assets too.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-018
+
+## 2026-02-21 | Session 13
+
+### Started
+- TASK-017: Delete old live-events background video from public/dist and server
+
+### Completed
+- TASK-017: Delete old live-events background video from public/dist and server
+  - Cleaned up the local distribution bundle by building a fresh `dist` folder.
+  - Ran `firebase deploy --only hosting` to synchronize the site edge cache. Firebase automatically removes references to the old file hash and begins serving the newly updated `live-events.mp4`.
+
+### Decisions (and why)
+- Firebase Hosting acts as a strict mirror of the `dist` folder upon deployment. Re-building the bundle and re-deploying is the correct way to "delete" the old video file from the active server release.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-017
+
+## 2026-02-21 | Session 12
+
+### Started
+- TASK-016: Deploy updated live-events video
+
+### Completed
+- TASK-016: Deploy updated live-events video
+  - Ran `npm run build` to generate the Vite production bundle, hashing the newly optimized user-provided `live-events.mp4` file.
+  - Ran `npx firebase deploy --only hosting` to upload the `dist` folder to Firebase.
+  - Deployment confirmed successful.
+
+### Decisions (and why)
+- Standard deployment process triggered per user request to push the new video asset live.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-016
+
+## 2026-02-21 | Session 11
+
+### Started
+- TASK-015: Slow gallery speed 15% and intensify outer frame glow
+
+### Completed
+- TASK-015: Slow gallery speed 15% and intensify outer frame glow
+  - Increased `gallery-scroll` duration in `main.css` from 50s to 57.5s (15% slower).
+  - Increased `box-shadow` outermost glow spread from 20px to 60px and opacity from 0.15 to 0.35 on the base frame state.
+  - Increased `box-shadow` outermost glow spread from 40px to 80px and opacity from 0.3 to 0.5 on the hover state.
+  - Deployed changes to Firebase Hosting.
+
+### Decisions (and why)
+- Stretching the box-shadow spread distance and opacity helps blend the dark background and the frame more naturally, reducing the harshness of the `#0d0c0a` background setting.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-015
+
+## 2026-02-21 | Session 10
+
+### Started
+- TASK-014: Add inner/outer glow to gallery frames for rich depth
+
+### Completed
+- TASK-014: Add inner/outer glow to gallery frames for rich depth
+  - Replaced the simple `box-shadow` in `main.css` for `.gallery-card-inner` with a multi-layered shadow consisting of a subtle gold inset border, a strong inner vignette, a deep outer drop shadow, and a subtle warm outer glow.
+  - Enhanced the hover state to intensify the glow and drop shadow.
+  - Ran `npm run build` and `firebase deploy --only hosting` to publish.
+
+### Decisions (and why)
+- Will use a combination of inset box-shadow (inner glow) and standard box-shadow (outer diffuse glow) using the brand's gold/warm tones or a deep atmospheric black to create a premium frame feeling. This avoids adding extra HTML DOM elements and relies entirely on CSS composite layers for performance.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-014
+
+## 2026-02-21 | Session 9
+
+### Started
+- TASK-013: Add 7 hero images to photo gallery and deploy
+
+### Completed
+- TASK-013: Add 7 hero images to photo gallery and deploy
+  - Modified `public/index.html` to duplicate the set of cards up to `anim-7`.
+  - Pointed all 14 `background-image` elements to `hero1.jpg` through `hero7.jpg`.
+  - Handled `main.css` to add `anim-6` and `anim-7` staggering delays mapped to existing `fly-in-*` animations.
+  - Elongated the `gallery-scroll` duration to `50s` to account for the wider gallery track block so the scrolling speed feels identical.
+  - Ran `npm run build` and `firebase deploy --only hosting` to upload the new assets.
+
+### Decisions (and why)
+- Will update the HTML to include 7 pairs of gallery cards instead of 5.
+- Will update the CSS track animation `calc` calculation and `anim-6`/`anim-7` fly-in keyframes to support 7 cards.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-013
+
+## 2026-02-21 | Session 8
+
+### Started
+- TASK-012: Setup CSS classes for final image placement in gallery
+
+### Completed
+- TASK-012: Setup CSS classes for final image placement in gallery
+  - Replaced `.grad-*` classes in `index.html` with explicit inline `style="background-image: url(...)"` pointing to placeholder `/images/hero-gallery-X.jpg` files.
+  - Added `.hero-img` class in `main.css` to govern `background-size: cover` and fallbacks for empty image states. 
+
+### Decisions (and why)
+- Will modify `index.html` to use inline styling for `background-image` so the user can just drop images into the `/images/` folder and update the URLs directly in the HTML without touching the CSS file. This makes content management easier for non-developers without needing a CMS.
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-012
+
+## 2026-02-21 | Session 7
+
+### Started
+- TASK-010: Replace hero background video with animated photo gallery
+- TASK-011: Deploy hero gallery to Firebase Hosting
+
+### Completed
+- TASK-010: Replace hero background video with animated photo gallery
+  - Modified `public/index.html` to swap `.bg-video-wrapper` with `.hero-gallery-wrapper` containing 10 gradient cards (5 original + 5 duplicate for seamless infinite scrolling).
+  - Modified `public/css/main.css` to add the `.hero-gallery-track` marquee infinite scroll.
+  - Added fly-in animations (`fly-in-1` to `fly-in-5`) and hover scale/pause behavior.
+- TASK-011: Deploy hero gallery to Firebase Hosting
+  - Ran `npm run build` to generate the Vite production bundle.
+  - Ran `npx firebase deploy --only hosting` to upload the `dist` folder to Firebase.
+  - Deployment confirmed successful.
+
+### Decisions (and why)
+- Used pure CSS for both the initial fly-in stagger and the seamless infinite loop marquee. This avoids heavy JavaScript listeners, takes advantage of GPU acceleration, and adheres to the "keep it simple" rule.
+- Translated the track by `calc(-50% - 7px)` to perfectly loop exactly 5 cards + 5 gaps (10 total cards with 9 gaps).
+
+### Questions / REVIEW markers
+- None yet.
+
+### Next
+- Complete TASK-010
+
+## 2026-02-20 | Session 6
+
+### Started
+- TASK-009: Deploy media materials to Firebase Hosting
+
+### Completed
+- TASK-009: Deploy media materials to Firebase Hosting
+  - Ran `npm run build` to generate the Vite production bundle, which automatically hashed the newly generated webm/mp4/jpg files in the `dist` directory.
+  - Ran `npx firebase deploy --only hosting` to upload the `dist` folder to Firebase.
+  - Deployment confirmed successful.
+
+### Decisions (and why)
+- Created TASK-009 per the user instruction to deploy the media. Every fix/action must have a corresponding task.
+- Used the existing `build` script in `package.json` to ensure Vite processes the assets before deployment, fixing potential caching issues and guaranteeing optimized bundle sizes.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Wait for user instruction or proceed with other tasks.
+
+## 2026-02-20 | Session 5
+
+### Started
+- TASK-003: Upload final production media files (replace placeholders)
+
+### Completed
+- TASK-003: Upload final production media files (replace placeholders)
+  - `public/videos/`: processed `live-events.mp4`, `product.mp4`, `social-media.mp4` by transcoding them to `.webm` using VP9.
+  - `public/images/`: extracted first frame JPEG posters for each video.
+  - Replaced the previous 0-byte `.webm` and `.jpg` placeholders.
+
+### Decisions (and why)
+- Used fast VP9 encoding for `.webm` generation to ensure backgrounds load quickly and are web-compatible.
+- `index.html`:70-89 — Left Hero section using `live-events.mp4` since it was previously set up that way and no separate `hero.mp4` placeholder was provided.
+- Skipped converting `DJI_0318.mov` and `summit.mov` as they appear to be unoptimized raw files and are not referenced by any current placeholders in `index.html`. 
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Wait for user instruction or proceed with other tasks.
+
 ## 2026-02-20 | Session 4
 
 ### Started

@@ -1,9 +1,5 @@
 import Lenis from "lenis";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 document.addEventListener("DOMContentLoaded", () => {
     // Mobile check for poster fallback instead of autoplaying videos (handled mostly via CSS, but good to know)
     const isMobile = window.innerWidth <= 768;
@@ -14,31 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smooth: true,
     });
-    window.lenis = lenis;
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
+    window.lenis = lenis; gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
     });
 
     gsap.ticker.lagSmoothing(0);
-
-    // 2. Section Snapping setup
-    const sections = document.querySelectorAll("section.panel");
-    if (!isMobile) {
-        sections.forEach((panel, i) => {
-            ScrollTrigger.create({
-                trigger: panel,
-                start: "top top",
-                snap: {
-                    snapTo: 1 / (sections.length - 1),
-                    duration: { min: 0.5, max: 0.8 },
-                    ease: "power2.inOut"
-                }
-            });
-        });
-    }
 
     // 3. Navigation Behaviors
     const topNav = document.getElementById("top-nav");

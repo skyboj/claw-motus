@@ -68,12 +68,53 @@
   <main>
     <!-- Sect 1: Hero -->
     <section class="panel" id="hero">
-      <div class="bg-video-wrapper">
-        <video class="bg-video" autoplay muted loop playsinline poster="/images/live-events-poster.jpg" preload="none">
-          <!-- WebM generated dynamically for placeholders -->
-          <source src="/videos/live-events.webm" type="video/webm" />
-          <source src="/videos/live-events.mp4" type="video/mp4" />
-        </video>
+      <div class="hero-gallery-wrapper">
+        <div class="hero-gallery-track">
+          <!-- Original Set (Fly-in) -->
+          <div class="gallery-card anim-1">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero1.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-2 offset-y">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero2.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-3">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero3.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-4 offset-y">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero4.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-5">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero5.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-6 offset-y">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero6.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-7">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero7.jpg');"></div>
+          </div>
+          <!-- Duplicate Set (For seamless loop) - IMPORTANT: Must match Original Set exactly -->
+          <div class="gallery-card anim-fade">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero1.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-fade offset-y">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero2.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-fade">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero3.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-fade offset-y">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero4.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-fade">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero5.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-fade offset-y">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero6.jpg');"></div>
+          </div>
+          <div class="gallery-card anim-fade">
+            <div class="gallery-card-inner hero-img" style="background-image: url('/images/hero7.jpg');"></div>
+          </div>
+        </div>
         <div class="video-overlay"></div>
       </div>
       <div class="panel-content">
@@ -91,6 +132,12 @@
     <!-- Sect 2: Live Events -->
     <section class="panel" id="live-events">
       <div class="bg-video-wrapper">
+        <div class="mobile-slideshow">
+          <div class="ms-slide ms-slide-4" style="background-image: url('/images/live-events-poster1.webp');"></div>
+          <div class="ms-slide ms-slide-4" style="background-image: url('/images/live-events-poster2.webp');"></div>
+          <div class="ms-slide ms-slide-4" style="background-image: url('/images/live-events-poster3.webp');"></div>
+          <div class="ms-slide ms-slide-4" style="background-image: url('/images/live-events-poster4.webp');"></div>
+        </div>
         <video class="bg-video" autoplay muted loop playsinline poster="/images/live-events-poster.jpg" preload="none">
           <source src="/videos/live-events.webm" type="video/webm" />
           <source src="/videos/live-events.mp4" type="video/mp4" />
@@ -108,6 +155,15 @@
     <!-- Sect 3: Social Media -->
     <section class="panel" id="social-media">
       <div class="bg-video-wrapper">
+        <div class="mobile-slideshow">
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster1.webp');"></div>
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster2.webp');"></div>
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster3.webp');"></div>
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster4.webp');"></div>
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster5.webp');"></div>
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster6.webp');"></div>
+          <div class="ms-slide ms-slide-7" style="background-image: url('/images/social-media-poster7.webp');"></div>
+        </div>
         <video class="bg-video" autoplay muted loop playsinline poster="/images/social-media-poster.jpg" preload="none">
           <source src="/videos/social-media.webm" type="video/webm" />
           <source src="/videos/social-media.mp4" type="video/mp4" />
@@ -125,6 +181,9 @@
     <!-- Sect 4: Product Video -->
     <section class="panel" id="product-video">
       <div class="bg-video-wrapper">
+        <div class="mobile-slideshow">
+          <div class="ms-slide ms-slide-1" style="background-image: url('/images/product-poster.webp');"></div>
+        </div>
         <video class="bg-video" autoplay muted loop playsinline poster="/images/product-poster.jpg" preload="none">
           <source src="/videos/product.webm" type="video/webm" />
           <source src="/videos/product.mp4" type="video/mp4" />
