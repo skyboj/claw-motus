@@ -28,8 +28,8 @@
     "serviceType": ["Live Event Video Production", "Social Media Video", "Product Video"]
   }
   </script>
-  <script type="module" crossorigin src="/assets/index-CiDXeOZd.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-JwRDHjJ9.css">
+  <script type="module" crossorigin src="/assets/index-B5bWMVme.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-_0DCSEze.css">
 </head>
 
 <body>
@@ -133,13 +133,46 @@
     <!-- Sect 2: Live Events -->
     <section class="panel" id="live-events">
       <div class="bg-video-wrapper">
-        <div class="mobile-slideshow">
-          <div class="ms-slide ms-slide-4" style="background-image: url('/assets/live-events-poster1-BJahI1Gh.webp');"></div>
-          <div class="ms-slide ms-slide-4" style="background-image: url('/assets/live-events-poster2-CmL2Kqlq.webp');"></div>
-          <div class="ms-slide ms-slide-4" style="background-image: url('/assets/live-events-poster3-XM_mHNyN.webp');"></div>
-          <div class="ms-slide ms-slide-4" style="background-image: url('/assets/live-events-poster4-DnZrbY4G.webp');"></div>
+        <div class="mobile-gallery-wrapper">
+          <div class="mobile-gallery-track track-4">
+            <!-- Original Set -->
+            <div class="gallery-card">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster1-BJahI1Gh.webp');"></div>
+            </div>
+            <div class="gallery-card offset-y">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster2-CmL2Kqlq.webp');"></div>
+            </div>
+            <div class="gallery-card">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster3-XM_mHNyN.webp');"></div>
+            </div>
+            <div class="gallery-card offset-y">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster4-DnZrbY4G.webp');"></div>
+            </div>
+            <!-- Duplicate Set for looping -->
+            <div class="gallery-card">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster1-BJahI1Gh.webp');"></div>
+            </div>
+            <div class="gallery-card offset-y">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster2-CmL2Kqlq.webp');"></div>
+            </div>
+            <div class="gallery-card">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster3-XM_mHNyN.webp');"></div>
+            </div>
+            <div class="gallery-card offset-y">
+              <div class="gallery-card-inner hero-img"
+                style="background-image: url('/assets/live-events-poster4-DnZrbY4G.webp');"></div>
+            </div>
+          </div>
         </div>
-        <video class="bg-video" autoplay muted loop playsinline poster="/images/live-events-poster.jpg" preload="none">
+        <video class="bg-video" autoplay muted loop playsinline poster="/assets/live-events-poster1-BJahI1Gh.webp"
+          preload="none">
           <source src="/assets/live-events-BuzOAE2T.webm" type="video/webm" />
           <source src="/assets/live-events-CGsQ3Tdo.mp4" type="video/mp4" />
         </video>
@@ -156,16 +189,13 @@
     <!-- Sect 3: Social Media -->
     <section class="panel" id="social-media">
       <div class="bg-video-wrapper">
-        <div class="mobile-slideshow">
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster1-Cn1GU7vd.webp');"></div>
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster2-CH_Ymb9r.webp');"></div>
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster3-Bl4GsBUp.webp');"></div>
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster4-DPijhGgw.webp');"></div>
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster5-BW8gv4e5.webp');"></div>
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster6-U-qMwvCZ.webp');"></div>
-          <div class="ms-slide ms-slide-7" style="background-image: url('/assets/social-media-poster7-naS4QrTo.webp');"></div>
-        </div>
-        <video class="bg-video" autoplay muted loop playsinline poster="/images/social-media-poster.jpg" preload="none">
+        <video class="mobile-bg-video" autoplay muted loop playsinline poster="/assets/social-media-poster1-Cn1GU7vd.webp"
+          preload="none">
+          <source src="/assets/social-media%20mobile-DuBSE9yB.webm" type="video/webm" />
+          <source src="/assets/social-media%20mobile-Be8Axty-.mp4" type="video/mp4" />
+        </video>
+        <video class="bg-video" autoplay muted loop playsinline poster="/assets/social-media-poster1-Cn1GU7vd.webp"
+          preload="none">
           <source src="/assets/social-media-C-7qgw02.webm" type="video/webm" />
           <source src="/assets/social-media-Dqjkm61U.mp4" type="video/mp4" />
         </video>
@@ -182,10 +212,8 @@
     <!-- Sect 4: Product Video -->
     <section class="panel" id="product-video">
       <div class="bg-video-wrapper">
-        <div class="mobile-slideshow">
-          <div class="ms-slide ms-slide-1" style="background-image: url('/assets/product-poster-_dIhb6nx.webp');"></div>
-        </div>
-        <video class="bg-video" autoplay muted loop playsinline poster="/images/product-poster.jpg" preload="none">
+        <div class="mobile-fallback-bg" style="background-image: url('/assets/product-poster-_dIhb6nx.webp');"></div>
+        <video class="bg-video" autoplay muted loop playsinline poster="/assets/product-poster-_dIhb6nx.webp" preload="none">
           <source src="/videos/product.webm" type="video/webm" />
           <source src="/assets/product-r0UBRZwN.mp4" type="video/mp4" />
         </video>

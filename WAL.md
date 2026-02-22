@@ -1,5 +1,82 @@
 # WAL — Project State Journal
 
+## 2026-02-21 | Session 33
+
+### Started
+- TASK-038: Replace mobile fading slideshows with horizontal scrolling galleries
+
+### Completed
+- TASK-038: Replace mobile fading slideshows with horizontal scrolling galleries
+  - `public/css/main.css`: Deleted the `.mobile-slideshow` crossfading rules and added `.mobile-gallery-wrapper`, `.mobile-gallery-track`, `track-4`, and `track-7` which replicate the horizontal offset marquee effect from the Hero section (`gallery-scroll` math logic).
+  - `public/index.html`: Replaced the 1-div-per-image mobile fallback containers (`.mobile-slideshow`) with the `.mobile-gallery-wrapper` and nested `.gallery-card` track logic. Kept card sizes identical to desktop for visual consistency, leveraging CSS `max-content` and infinite horizontal translations for the marquees.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user liked the horizontal overlapping marquee effect built for the desktop Hero section and wanted it adapted for the mobile versions of the secondary Video sections (Live Events, Social Media, Product Video) since they were originally just standing crossfading pictures. Reusing `.gallery-card` from the global stylesheet enforces uniform visual pacing. I calculated tracking percentages explicitly for `track-4` (4-item layouts) and `track-7` (7-item layouts). For the 1-item Product Video layout, I aggressively duplicated it 4 times so the scrolling motion would be seamless.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check back with the user.
+
+## 2026-02-21 | Session 32
+
+### Started
+- TASK-036: Fix fallback poster references in index.html for mobile
+
+### Completed
+- TASK-036: Fix fallback poster references in index.html for mobile
+  - `public/index.html`: Updated the `<video>` block `poster` URL attributes for `#live-events`, `#social-media`, and `#product-video` explicitly from their defunct `.jpg` files to the newly processed `.webp` equivalents.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- During review of the mobile video layouts, it was discovered that while the mobile `.mobile-slideshow` divs were rendering properly now, the fallback HTML `<video>` player still expected `.jpg` images to load as the cover picture. Since the `live-events-poster.jpg`, `social-media-poster.jpg`, and `product-poster.jpg` objects were deleted previously in favor of smaller WebP compression, the browser could not grab the fallback image. Updating them explicitly binds the `poster=` tag to the new files.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Inform user of resolution.
+
+## 2026-02-21 | Session 31
+
+### Started
+- TASK-035: Fix mobile slideshow visibility missing due to z-index
+
+### Completed
+- TASK-035: Fix mobile slideshow visibility missing due to z-index
+  - `public/css/main.css`: Changed `.mobile-slideshow` from `z-index: 0` to `z-index: 2` entirely.
+  - Re-compiled Vite build and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- The user reported the mobile webp posters weren't showing up for the video blocks (Live Events, Social Media). Inspection showed that while `display: block` successfully toggled the slideshow wrapper on `.mobile-slideshow` at small viewports, it sat at `z-index: 0`. The `.video-overlay` (the dark linear gradient layer explicitly above the videos) naturally sat at `z-index: 1`, covering the posters entirely. Raising `.mobile-slideshow` to `z-index: 2` pulls it completely free of the `.bg-video-wrapper` layers.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Inform user of resolution.
+
+## 2026-02-21 | Session 30
+
+### Started
+- TASK-034: Commit and push changes to git
+
+### Completed
+- TASK-034: Commit and push changes to git
+  - Ran `git add .` to stage all modifications including WebP poster migrations, WebM fixes, scrolling bug removals, background additions, and compressed Hero images.
+  - Pushed to `origin/main` as requested.
+
+### Decisions (and why)
+- Following standard user protocol rule. 
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Wait for user instructions.
+
 ## 2026-02-21 | Session 29
 
 ### Started

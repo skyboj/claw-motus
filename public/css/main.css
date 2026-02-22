@@ -845,6 +845,13 @@ textarea.form-control {
 }
 
 /* Mobile Breakpoints */
+.mobile-slideshow,
+.mobile-gallery-wrapper,
+.mobile-fallback-bg,
+.mobile-bg-video {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -903,7 +910,8 @@ textarea.form-control {
     display: none !important;
   }
 
-  .mobile-slideshow {
+  .mobile-fallback-bg,
+  .mobile-bg-video {
     display: block;
     position: absolute;
     top: 0;
@@ -913,122 +921,77 @@ textarea.form-control {
     z-index: 0;
   }
 
-  .ms-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .mobile-fallback-bg {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0;
   }
 
-  /* 4 slides */
-  .ms-slide-4 {
-    animation: fade-4 16s infinite;
+  .mobile-bg-video {
+    object-fit: cover;
   }
 
-  .ms-slide-4:nth-child(1) {
-    animation-delay: 0s;
+  .mobile-gallery-wrapper {
+    display: flex;
+    position: absolute;
+    top: 5%;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    overflow: hidden;
+    align-items: center;
+    z-index: 2;
+    /* Put above the video overlay which is z-index 1 */
+    pointer-events: none;
+    /* Let clicks pass through if needed, though they don't on hero */
   }
 
-  .ms-slide-4:nth-child(2) {
-    animation-delay: 4s;
+  #live-events .panel-content,
+  #social-media .panel-content,
+  #product-video .panel-content {
+    align-self: flex-end;
+    margin-bottom: 2rem;
   }
 
-  .ms-slide-4:nth-child(3) {
-    animation-delay: 8s;
+  .mobile-gallery-track {
+    display: flex;
+    width: max-content;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    padding-left: 20px;
   }
 
-  .ms-slide-4:nth-child(4) {
-    animation-delay: 12s;
+  /* 4 cards total width = 4 * (286 - 30) = 1024px */
+  .track-4 {
+    animation-name: scroll-4;
+    animation-duration: 32.8s;
   }
 
-  /* 7 slides */
-  .ms-slide-7 {
-    animation: fade-7 28s infinite;
+  /* 7 cards total width = 7 * (286 - 30) = 1792px */
+  .track-7 {
+    animation-name: scroll-7;
+    animation-duration: 57.5s;
   }
 
-  .ms-slide-7:nth-child(1) {
-    animation-delay: 0s;
+  /* We will duplicate the 1-card product poster so it scrolls too */
+}
+
+@keyframes scroll-4 {
+  from {
+    transform: translateX(0);
   }
 
-  .ms-slide-7:nth-child(2) {
-    animation-delay: 4s;
-  }
-
-  .ms-slide-7:nth-child(3) {
-    animation-delay: 8s;
-  }
-
-  .ms-slide-7:nth-child(4) {
-    animation-delay: 12s;
-  }
-
-  .ms-slide-7:nth-child(5) {
-    animation-delay: 16s;
-  }
-
-  .ms-slide-7:nth-child(6) {
-    animation-delay: 20s;
-  }
-
-  .ms-slide-7:nth-child(7) {
-    animation-delay: 24s;
-  }
-
-  /* 1 slide */
-  .ms-slide-1 {
-    opacity: 1;
+  to {
+    transform: translateX(-1024px);
   }
 }
 
-@keyframes fade-4 {
-  0% {
-    opacity: 1;
+@keyframes scroll-7 {
+  from {
+    transform: translateX(0);
   }
 
-  20% {
-    opacity: 1;
+  to {
+    transform: translateX(-1792px);
   }
-
-  25% {
-    opacity: 0;
-  }
-
-  95% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-7 {
-  0% {
-    opacity: 1;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  14.28% {
-    opacity: 0;
-  }
-
-  95% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.mobile-slideshow {
-  display: none;
 }

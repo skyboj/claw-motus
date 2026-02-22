@@ -25,7 +25,16 @@
 - [x] TASK-031: Increase Hero dimming to 95% and add blur
 - [x] TASK-032: Reduce Hero section background blur to 3px
 - [x] TASK-033: Build and deploy updated (smaller) gallery images to Firebase
-- [~] TASK-034: Commit and push changes to git
+- [x] TASK-035: Fix mobile slideshow visibility missing due to z-index
+- [x] TASK-034: Commit and push changes to git
+- [x] TASK-036: Fix fallback poster references in index.html for mobile
+- [~] TASK-037: Fix CSS specificity overriding mobile display block
+- [x] TASK-038: Replace mobile fading slideshows with horizontal scrolling galleries
+- [x] TASK-039: Adjust layout for mobile so content and gallery don't overlap
+- [x] TASK-040: Change mobile Product section to static background image
+- [x] TASK-041: Replace mobile social media gallery with specific videos
+- [x] TASK-042: Build and deploy to Firebase
+- [ ] TASK-043: Commit and push changes to git
 
 ## Normal priority
 - [x] TASK-003: Upload final production media files (replace placeholders)
