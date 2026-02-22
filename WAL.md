@@ -1,5 +1,25 @@
 # WAL — Project State Journal
 
+## 2026-02-21 | Session 38
+
+### Started
+- TASK-053: Add top margin to social media text on mobile to fix visual crowding
+
+### Completed
+- TASK-053: Add top margin to social media text on mobile to fix visual crowding
+  - `public/css/main.css`: Separated `#social-media .panel-content` from `#live-events .panel-content` clustering and added `margin-top: 2rem;` to push the headline away from the bottom of the newly-uncropped social media video wrapper.
+- Built and deployed to Firebase.
+- Pushed to Github.
+
+### Decisions (and why)
+- Because the social media video was allowed to take its native height in Phase 3, the immediate start of the text felt visually crushed against its border. Implementing a targeted top margin restores identical whitespace ratio as the rest of the site layout flow.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check with user.
+
 ## 2026-02-21 | Session 37
 
 ### Started

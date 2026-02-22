@@ -1029,10 +1029,15 @@ textarea.form-control {
   }
 
   /* We clear out the absolute positioning forced gap / overlap hacks */
-  #live-events .panel-content,
+  #live-events .panel-content {
+    align-self: auto;
+    margin-bottom: 0;
+  }
+
   #social-media .panel-content {
     align-self: auto;
     margin-bottom: 0;
+    margin-top: 2rem;
   }
 
   #product-video .panel-content {
