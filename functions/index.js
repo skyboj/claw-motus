@@ -119,7 +119,71 @@ app.post(["/quote", "/api/quote"], async (req, res) => {
     };
   }
 
-  // --- D. Save to Firestore Database ---
+  // --- D. Send Client Confirmation Email ---
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  try {
+    await resend.emails.send({
+      from: "Claw Motus <quotes@clawmotus.com>",
+      to: email,
+      subject: "We received your quote request",
+      html: `
+        <div style="font-family: sans-serif; line-height: 1.5; color: #333;">
+          <p>Hi ${name},</p>
+          <p>Thanks for reaching out to Claw Motus! We've received your details regarding the <strong>${projectType}</strong> project.</p>
+          <p>Our team is reviewing your requirements now and will get back to you with a tailored quote shortly.</p>
+          <br>
+          <p>Best regards,<br>The Claw Motus Team</p>
+        </div>
+      `,
+    });
+    console.log("Client confirmation email sent to:", email);
+  } catch (emailErr) {
+    console.error("Failed to send client confirmation:", emailErr);
+  }
+
+  // --- E. Send Founder Notification Email ---
+  try {
+    const briefHTML = `
+      <h3>New Quote Request: ${projectType}</h3>
+      <hr/>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Company:</strong> ${company || "N/A"}</p>
+      <p><strong>Date:</strong> ${eventDate || "N/A"}</p>
+      <p><strong>Location:</strong> ${location || "N/A"}</p>
+      <p><strong>Budget:</strong> ${budget}</p>
+      <p><strong>Description:</strong> ${description}</p>
+      <hr/>
+      <h4>AI Analysis:</h4>
+      <p><strong>Summary:</strong><br/>${aiResult.summary}</p>
+      <p><strong>Scope Estimate:</strong><br/>${aiResult.scopeEstimate}</p>
+      <p><strong>Priority Level:</strong> ${aiResult.priorityLevel}</p>
+      <br/>
+      <p><strong>Potential Challenges:</strong></p>
+      <ul>
+        ${(aiResult.potentialChallenges || []).map(c => `<li>${c}</li>`).join("")}
+      </ul>
+      <p><strong>Follow-Up Questions:</strong></p>
+      <ul>
+        ${(aiResult.followUpQuestions || []).map(q => `<li>${q}</li>`).join("")}
+      </ul>
+      <br/>
+      <p><strong>Internal Notes:</strong><br/>${aiResult.internalNotes}</p>
+    `;
+
+    await resend.emails.send({
+      from: "Claw Motus AI <quotes@clawmotus.com>",
+      to: "production.boichenko@icloud.com",
+      subject: `New Lead: ${projectType} - ${name}`,
+      html: briefHTML,
+    });
+    console.log("Founder notification email sent.");
+  } catch (emailErr) {
+    console.error("Failed to send founder notification:", emailErr);
+  }
+
+  // --- F. Save to Firestore Database ---
   try {
     const newQuote = {
       name,
@@ -132,7 +196,7 @@ app.post(["/quote", "/api/quote"], async (req, res) => {
       description,
       aiSummary: aiResult.summary,
       aiBrief: aiResult,
-      status: "pending", // MCP Agent target
+      status: "emailed", // Updated since we skip the MCP detour
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     };
 
@@ -140,8 +204,6 @@ app.post(["/quote", "/api/quote"], async (req, res) => {
     console.log("Successfully saved new quote request to Firestore.");
   } catch (dbErr) {
     console.error("Firestore Save Error:", dbErr);
-    // Even if db fails, we still return 200 to frontend so they see a success message,
-    // though in production we might return a 500.
   }
 
   // Respond to frontend
