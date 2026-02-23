@@ -1,5 +1,25 @@
 # WAL — Project State Journal
 
+## 2026-02-22 | Session 41
+
+### Started
+- TASK-056: Increase navbar company logo scale by 30%
+
+### Completed
+- TASK-056: Increase navbar company logo scale by 30%
+  - `public/css/main.css`: Changed `.nav-logo` property `height` from `28px` to `36px` to scale up the visible footprint of the `.svg` graphic in the menu bar based on user preference.
+- Built and deployed to Firebase Hosting.
+- Pushed changes to GitHub.
+
+### Decisions (and why)
+- N/A - simple preference scaler. Vertical `height` rule enforces proportional scaling on `.svg` source natively.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check back with user to confirm visual sizing preference.
+
 ## 2026-02-22 | Session 40
 
 ### Started

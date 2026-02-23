@@ -51,6 +51,7 @@
 - [x] TASK-053: Add top margin to social media text on mobile to fix visual crowding
 - [x] TASK-054: Test email quote system to ensure correct operation
 - [x] TASK-055: Implement and position company logo in the navbar
+- [~] TASK-056: Increase navbar company logo scale by 30%
 - [x] TASK-003: Upload final production media files (replace placeholders)
 - [x] TASK-004: Fix minor front-end design bugs across different viewports
 - [x] TASK-005: Make quote form scrollable when background scroll is locked (found during TASK-004)
