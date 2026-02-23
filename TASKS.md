@@ -55,3 +55,4 @@
 - [x] TASK-054: Test email quote system to ensure correct operation
 - [x] TASK-055: Implement and position company logo in the navbar
 - [x] TASK-056: Increase navbar company logo scale by 30%
+- [x] TASK-057: Add Open Graph and Twitter Card meta tags for client link previews

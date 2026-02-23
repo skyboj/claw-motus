@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-22 | Session 42
+
+### Started
+- TASK-057: Add Open Graph and Twitter Card meta tags for client link previews
+
+### Completed
+- TASK-057: Add Open Graph and Twitter Card meta tags for client link previews
+  - `public/index.html`: Injected `og:title`, `og:description`, `og:image`, `og:url` and their `twitter:` counterparts into the `<head>` document block. 
+  - Mapped the preview card thumbnails to the absolute URL of `images/hero1.jpg`.
+- Built the production payload via Vite.
+- Deployed to Firebase Hosting so new links immediately parse with rich styling across messaging applications.
+- Pushed changes to GitHub.
+
+### Decisions (and why)
+- Chose `hero1.jpg` instead of `.webp` or `.svg` forms for the `og:image` property. Many older or non-standard messaging clients (like enterprise Slack builds, older iOS versions, or custom CRMs) fail to parse modern image formats for preview cards. A standard `.jpg` guarantees maximum fallback compatibility when the founder texts the URL to a client.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check with user to ensure they can see the preview card when pasting the link locally.
+
 ## 2026-02-22 | Session 41
 
 ### Started
