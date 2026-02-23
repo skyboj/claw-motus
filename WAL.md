@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-23 | Session 43
+
+### Started
+- TASK-058: Configure GitHub Actions workflow for Firebase Preview Channels on PR
+- TASK-059: Configure GitHub Actions workflow for Firebase Production Deployment on Merge
+
+### Completed
+- TASK-058 & 059:
+  - Created `.github/workflows/firebase-hosting-pull-request.yml` manually. This triggers the FirebaseExtended action when a new PR is opened to generate a temporary Firebase Hosting channel, and posts the resulting preview URL into the PR thread.
+  - Created `.github/workflows/firebase-hosting-merge.yml`. This triggers when the PR merges into `main`, running `npm ci` and `npm run build` locally within the GitHub Actions runner, then pushes the resulting `dist` bundle directly to the live Firebase production channel.
+- Pushed changes to GitHub.
+
+### Decisions (and why)
+- Bypassed the interactive `firebase init hosting:github` CLI tool in favor of manually writing the `.yml` structural files. The interactive CLI causes blocking loops in automated agents and overwrites existing `firebase.json` headers sometimes, so injecting the files safely directly into the `.github/` structure works perfectly.
+- Defaulted the Node setup container in the workflows to v20 to match the user's local Firebase Functions `nodejs20` runtime.
+
+### Questions / REVIEW markers
+- Needs the user to manually add the `FIREBASE_SERVICE_ACCOUNT_CLAW_MOTUS` secret token to their GitHub Repository settings. 
+
+### Next
+- Provide the user with the explicit instructions for generating their Firebase Service Account JSON and placing it in their repository secrets manager.
+
 ## 2026-02-22 | Session 42
 
 ### Started

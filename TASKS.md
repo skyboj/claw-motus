@@ -56,3 +56,5 @@
 - [x] TASK-055: Implement and position company logo in the navbar
 - [x] TASK-056: Increase navbar company logo scale by 30%
 - [x] TASK-057: Add Open Graph and Twitter Card meta tags for client link previews
+- [x] TASK-058: Configure GitHub Actions workflow for Firebase Preview Channels on PR
+- [x] TASK-059: Configure GitHub Actions workflow for Firebase Production Deployment on Merge
