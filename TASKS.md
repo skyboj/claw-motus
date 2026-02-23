@@ -58,3 +58,5 @@
 - [x] TASK-057: Add Open Graph and Twitter Card meta tags for client link previews
 - [x] TASK-058: Configure GitHub Actions workflow for Firebase Preview Channels on PR
 - [x] TASK-059: Configure GitHub Actions workflow for Firebase Production Deployment on Merge
+- [x] TASK-060: Explain PR vs Staging architecture to user
+- [x] TASK-061: Create staging GitHub Action and configure staging branch

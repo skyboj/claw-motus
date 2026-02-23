@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-23 | Session 44
+
+### Started
+- TASK-060: Explain PR vs Staging architecture to user
+- TASK-061: Create staging GitHub Action and configure staging branch
+
+### Completed
+- TASK-060 & 061:
+  - Deleted `.github/workflows/firebase-hosting-pull-request.yml` because the ephemeral PR architecture was rejected by the user.
+  - Created `.github/workflows/firebase-hosting-staging.yml`. This script listens exclusively for pushes to the `staging` branch and triggers a Firebase Extended action to deploy the build to a permanent channel named `staging`.
+  - Created the tracking `staging` branch in Git and checked out the environment.
+- Pushed changes to GitHub.
+
+### Decisions (and why)
+- Migrated away from PR previews to provide the user with a permanent, predictable test URL (`staging.claw-motus.web.app` or similar Firebase-assigned hash). This makes sharing the test environment with non-technical clients significantly easier, as the link will never change or expire. Let the CI/CD pipeline handle the `staging` branch triggers natively.
+
+### Questions / REVIEW markers
+- None. Needs User to confirm they added the Firebase Service Account secret.
+
+### Next
+- Verify successful Firebase Hosting deployment for the first staging build.
+
 ## 2026-02-23 | Session 43
 
 ### Started
