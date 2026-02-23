@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-22 | Session 40
+
+### Started
+- TASK-055: Implement and position company logo in the navbar
+
+### Completed
+- TASK-055: Implement and position company logo in the navbar
+  - `public/index.html`: Replaced `.logo` placeholder div text with an `<img>` tag linking to `/images/claw motus logo 300 300.svg`.
+  - `public/css/main.css`: Restructured `.logo` flex properties and created `.nav-logo` class with `height: 28px` to restrict the SVG's native 300px scale down to match the original typography height.
+- Built and deployed to Firebase Hosting.
+- Pushed changes to GitHub.
+
+### Decisions (and why)
+- Chose the `.svg` version of the logo over the `.pxd` file because vector graphics remain infinitely sharp on high-DPI mobile phone screens and load significantly faster than heavy rasters, ensuring the navbar always looks pristine regardless of device resolution.
+- Used `height` rather than `width` for the CSS constraint because horizontal-scrolling navbars are bound strictly by their vertical padding (`var(--header-height)`). 
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- Check back with user to confirm visual sizing preference.
+
 ## 2026-02-21 | Session 39
 
 ### Started
