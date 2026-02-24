@@ -1,6 +1,7 @@
 {
     "hosting": {
         "public": "dist",
+        "retainedVersions": 3,
         "ignore": [
             "firebase.json",
             "**/.*",
