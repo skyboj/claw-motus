@@ -1,5 +1,24 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 49
+
+### Started
+- TASK-065: Debug GitHub Pages staging pipeline failure
+
+### Completed
+- Identified the root cause of the "deployment rejected" error to be GitHub's Environment Protection rules natively restricting `github-pages` deployments from non-default branches.
+- Updated documentation and instructed the user how to whitelist the `staging` branch in the GitHub repository settings.
+- Marked TASK-065 as complete.
+
+### Decisions (and why)
+- The GitHub Pages Actions runner uses a deployment environment named `github-pages`. By default on GitHub, this environment restricts deployments to the repository's default branch (`main`). Because this is a GitHub internal security setting, it cannot be overridden via YAML code inside the repository. The only secure and proper fix is to whitelist the `staging` branch in the Repository Environment settings directly in the browser.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Await user confirmation that the branch has been whitelisted and the deployment passes.
+
 ## 2026-02-24 | Session 48
 
 ### Started
