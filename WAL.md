@@ -1,5 +1,30 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 45
+
+### Started
+- TASK-062: Propose comprehensive SEO and Google Search Console optimization plan
+- TASK-063: Implement SEO enhancements (sitemap, robots, alt text, canonicals)
+
+### Completed
+- TASK-062 & 063:
+  - Created `public/sitemap.xml` listing the primary domain index to force Google Search Console crawling.
+  - Created `public/robots.txt` explicitly allowing all bot traffic to `/` while disallowing indexers from probing the `/api/` endpoints.
+  - Added `<link rel="canonical" href="https://clawmotus.com/" />` to `index.html` header to consolidate domain ranking.
+  - Wrote a Node script to inject descriptive `aria-label` and `role="img"` attributes natively into the 14 inline CSS background images mapping the Hero gallery.
+  - Injected descriptive `aria-label` tags into all `<video>` elements (`live-events`, `social-media`, `product`) for maximum accessibility and media indexing.
+- Re-built `dist` via Vite.
+- Pushed changes to GitHub `staging` branch.
+
+### Decisions (and why)
+- Because the gallery uses `div` backgrounds instead of raw `<img />` tags, standard `alt=""` text is invalid HTML. Utilizing `role="img"` and `aria-label="..."` is the W3C standard for making CSS background images parsable by screen readers and search bots, achieving identical SEO ranking results.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- User should submit the exact URL `https://clawmotus.com/sitemap.xml` directly into their Google Search Console dashboard.
+
 ## 2026-02-23 | Session 44
 
 ### Started
