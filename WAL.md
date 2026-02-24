@@ -17,7 +17,7 @@
 None.
 
 ### Next
-- Await user confirmation that the branch has been whitelisted and the deployment passes.
+- Wait for user instructions. The staging branch should now be accessible at `https://skyboj.github.io/claw-motus/` immediately upon `git push origin staging`.
 
 ## 2026-02-24 | Session 48
 
