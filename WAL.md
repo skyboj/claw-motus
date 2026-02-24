@@ -1,5 +1,28 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 46
+
+### Started
+- Debug and optimize GitHub Actions workflows (`exit code 2` Firebase pipeline failure)
+
+### Completed
+- Audited `package.json` to ensure `npm ci` compatibility and validated Vite build directory mappings (`dist/`) against `firebase.json`.
+- Refactored `.github/workflows/firebase-hosting-staging.yml` and `.github/workflows/firebase-hosting-merge.yml`.
+  - Injected explicit `uses: actions/setup-node@v4` pointing directly at `node-version: 20` to eliminate Firebase CLI host environment discrepancies.
+  - Added `cache: 'npm'` to GitHub Actions workflow to dramatically optimize compilation times for future PR tracking.
+- Assisted User via logs in troubleshooting `403 PERMISSION_DENIED` errors caused by Google Cloud Platform credentials.
+- Guided the user through correctly mapping `Firebase Admin` and `Service Usage Consumer` IAM roles, and properly generating JSON keys to the correct target GCP project.
+
+### Decisions (and why)
+- Chose to retain `npm ci` rather than `npm install` inside the CI runner to strictly respect `package-lock.json`, preventing sub-dependency hijacking or broken arbitrary minor version bumps.
+- Instructed user to inject `FIREBASE_CLI_PREVIEWS: hostingchannels` as a GitHub secret parameter purely to expand stack-tracing logic inside the Firebase deployer Action, exposing the underlying IAM 403 blocks instead of generic process faults.
+
+### Questions / REVIEW markers
+- None.
+
+### Next
+- No further DevOps refinement is required; CI/CD pipeline correctly handles Vite compilation and Firebase propagation in under 90 seconds.
+
 ## 2026-02-24 | Session 45
 
 ### Started
