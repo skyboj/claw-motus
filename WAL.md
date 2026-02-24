@@ -1,5 +1,45 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 48
+
+### Started
+- TASK-064: Configure staging branch to deploy to GitHub Pages instead of Firebase
+
+### Completed
+- Deleted `.github/workflows/firebase-hosting-staging.yml`.
+- Created `.github/workflows/github-pages-staging.yml` using `actions/deploy-pages@v4` to pipe the Vite build natively into a GitHub Pages environment.
+- Injected `--base=/${{ github.event.repository.name }}/` directly into the Actions `npm run build` command.
+- Updated `TASKS.md` marking TASK-064 as done.
+
+### Decisions (and why)
+- The user requested migrating the `staging` test branch to GitHub Pages instead of Firebase. Rather than maintaining a complex Firebase API token integration for tests, I deployed the standard GitHub Pages Action pipeline listening only on the `staging` branch.
+- I chose **not** to hardcode `base: '/claw-motus/'` into `vite.config.js`. Since the production branch (`main`) seemingly still deploys to Firebase (which serves from the root `/`), modifying the base configuration globally would break production. Dynamically pushing the base override inside the GitHub Action prevents conflict and guarantees GitHub Pages resolves asset paths correctly under `username.github.io/repo/`.
+
+### Questions / REVIEW markers
+- Note: GitHub Pages deployment requires the repository settings (`Settings -> Pages`) to have the "Build and deployment" source set to "GitHub Actions" instead of "Deploy from a branch".
+
+### Next
+- Wait for user instructions or continue with task prioritization.
+
+## 2026-02-24 | Session 47
+
+### Started
+- Investigate excessive Google Cloud Analytics storage and bandwidth consumption.
+
+### Completed
+- Used `du -ha` to trace directory weights. Discovered `dist` compiles to ~182MB per deployment due to extremely large uncompressed `.webm` and `.mp4` background videos (e.g., `social-media mobile.webm` is 50MB alone).
+- Added `"retainedVersions": 3` to `firebase.json`. This hard caps the CI/CD pipeline so Firebase will aggressively purge older deployments rather than archiving every build indefinitely, effectively stopping the 4.5+ GB storage leak.
+- Committed and pushed the GCP optimization to the `staging` branch.
+
+### Decisions (and why)
+- Firebase Hosting natively retains every deployed release forever as a rollback safety measure. At 182MB per build, 25 test builds bloated the GCP storage bucket to 4.5GB. Constraining history to `3` versions provides ample rollback capability without enterprise storage bills.
+
+### Questions / REVIEW markers
+- Advised the user that the 4GB+ bandwidth usage is because background videos trigger ~100MB of network traversal *per page load*. Compression of the base video assets is mandatory.
+
+### Next
+- User needs to compress the raw video pipeline assets down to 2-5MB Web-optimized formats manually before the next staging push.
+
 ## 2026-02-24 | Session 46
 
 ### Started

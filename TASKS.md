@@ -62,3 +62,4 @@
 - [x] TASK-061: Create staging GitHub Action and configure staging branch
 - [x] TASK-062: Propose comprehensive SEO and Google Search Console optimization plan
 - [x] TASK-063: Implement SEO enhancements (sitemap, robots, alt text, canonicals)
+- [x] TASK-064: Configure staging branch to deploy to GitHub Pages instead of Firebase
