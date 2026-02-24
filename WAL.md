@@ -1,5 +1,24 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 51
+
+### Started
+- TASK-070: Debug missing video files and JS errors on staging
+
+### Completed
+- `index.html`: Refactored all absolute paths (`/videos/`, `/images/`, `/css/`, `/js/`) to relative paths (`videos/`, `images/`, `css/`, `js/`).
+- `js/main.js`:79 — Defined `const sections = document.querySelectorAll('section.panel');` directly above the `sections.forEach` observer initialization to resolve an Uncaught ReferenceError.
+
+### Decisions (and why)
+- **Pathing Fix:** Vite builds correctly inject the `--base=/claw-motus/` argument into *relative* paths for GitHub Pages subfolder deployment. However, it explicitly ignores user-defined absolute path roots starting with `/`. This resulted in the staging site trying to load `skyboj.github.io/videos/` instead of `skyboj.github.io/claw-motus/videos/`, producing 404s for all dynamically sourced DOM media. Using relative paths guarantees Vite compiles the correct production URLs.
+- **JS Error Fix:** The IntersectionObserver logic used to trigger nav highlighting and autoplay videos was trying to attach to a `sections` array that had never been queried from the DOM, causing a total script crash on load.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Push fixes to staging pipeline.
+
 ## 2026-02-24 | Session 50
 
 ### Started

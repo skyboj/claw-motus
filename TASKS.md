@@ -68,3 +68,4 @@
 - [x] TASK-067: Implement `srcset` function for responsive images
 - [x] TASK-068: Verify and commit new optimized video assets
 - [x] TASK-069: Build, commit, and push changes to staging
+- [x] TASK-070: Debug missing video files on staging (GitHub Pages 404s) and JS ReferenceError

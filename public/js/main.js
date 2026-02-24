@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, observerOptions);
 
+    const sections = document.querySelectorAll('section.panel');
     sections.forEach(sec => sectionObserver.observe(sec));
 
     // Connect clicks to Lenis scroll
