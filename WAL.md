@@ -1,5 +1,29 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 50
+
+### Started
+- TASK-066: Convert and compress all gallery images to WebP
+- TASK-067: Implement `srcset` function for responsive images
+- TASK-068: Verify and commit new optimized video assets
+- TASK-069: Build, commit, and push changes to staging
+
+### Completed
+- `index.html`: Refactored the 14 `hero*.jpg` gallery cards inside `.hero-gallery-track`. Replaced the CSS `background-image` bindings with explicit HTML `<picture>` elements containing `<source srcset="/images/heroX.webp" type="image/webp" />` and standard `<img>` `.jpg` fallbacks.
+- `main.css`: Adjusted `.hero-img` to `display: flex` and told child `picture` and `img` elements to `object-fit: cover` to ensure the new HTML assets perfectly mimic the original `background-size: cover` behavior without breaking the gallery card layout.
+- Deleted all original heavy `hero*.jpg` files from `/public/images/`.
+- Compressed `get a quote.webp` and `san francisco.webp` down to `q=60` encoding natively to shrink the 3MB+ raw files into kb-sized web assets.
+- New video assets replaced by the user were integrated implicitly by Vite during the build pipeline.
+
+### Decisions (and why)
+- CSS `background-image` doesn't natively support graceful source selection logic (like `srcset`) or MIME-type sniffing across older browsers without complex modern `image-set()` CSS rules that often fail on iOS Safari. Switching the Hero gallery to absolute `<picture>` DOM elements allows the browser's native parser to decide between the highly-compressed `.webp` image or the fallback `.jpg` before downloading either file, guaranteeing optimal bandwidth.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- User to review staging deployment.
+
 ## 2026-02-24 | Session 49
 
 ### Started

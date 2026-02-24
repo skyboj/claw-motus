@@ -64,3 +64,7 @@
 - [x] TASK-063: Implement SEO enhancements (sitemap, robots, alt text, canonicals)
 - [x] TASK-064: Configure staging branch to deploy to GitHub Pages instead of Firebase
 - [x] TASK-065: Debug GitHub Pages staging pipeline failure
+- [x] TASK-066: Convert and compress all gallery images to WebP
+- [x] TASK-067: Implement `srcset` function for responsive images
+- [x] TASK-068: Verify and commit new optimized video assets
+- [x] TASK-069: Build, commit, and push changes to staging
