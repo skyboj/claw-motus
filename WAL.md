@@ -1,5 +1,22 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 60
+
+### Started
+- TASK-079: Add bottom padding to Quote section on mobile
+
+### Completed
+- `public/css/main.css`:880-885 — Grouped the `#quote-panel-hook` identifier alongside `#about` for mobile styling. This grants it `min-height: 100svh;` and `padding-bottom: calc(var(--bottom-nav-height) + 2rem);`.
+
+### Decisions (and why)
+- **Extra breathing room on mobile CTA:** The final "Let's Make Something Together" section felt cramped on mobile screens, with the actual button sitting dangerously close to the bottom OS swipe bar and the customized `.bottom-nav`. By applying the exact same layout height math that governs the `#about` section, the content centers vertically on the phone viewport and guarantees a comfortable resting margin below the "Start Your Quote" button.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Push Hotfix to main.
+
 ## 2026-02-24 | Session 59
 
 ### Started

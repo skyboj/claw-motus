@@ -877,7 +877,8 @@ textarea.form-control {
     padding-top: var(--header-height);
   }
 
-  #about {
+  #about,
+  #quote-panel-hook {
     min-height: 100svh;
     justify-content: center;
     padding-bottom: calc(var(--bottom-nav-height) + 2rem);
