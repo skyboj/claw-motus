@@ -71,3 +71,6 @@
 - [x] TASK-070: Debug missing video files on staging (GitHub Pages 404s) and JS ReferenceError
 - [x] TASK-072: Separate backup assets from production build on main
 - [x] TASK-073: Merge staging to main and deploy to production (Firebase)
+
+## Normal priority
+- [x] TASK-074: Update SEO OpenGraph preview image and expand JSON-LD services schema

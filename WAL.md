@@ -1,5 +1,24 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 55
+
+### Started
+- TASK-074: Update SEO OpenGraph preview image and expand JSON-LD services schema
+
+### Completed
+- `public/index.html`:14-25 — Replaced `og:image` and `twitter:image` values with exactly `https://clawmotus.com/images/social-media-poster1.webp`.
+- `public/index.html`:43-55 — Expanded the `application/ld+json` Schema `serviceType` to include 7 more descriptive services (e.g. Corporate Video, Brand Films, Documentary) to boost organic Google discovery.
+- Root filesystem: Created `public/public/images/social-media-poster1.webp` to ensure Vite's static asset copier natively places the OG thumbnail into `dist/images/` for live hosting access.
+
+### Decisions (and why)
+- **Vite Absolute Path Static Asset Handling:** Vite's HTML builder ignores external-looking `https://` URLs present in Meta tags during compilation, preventing the native hashing logic from pulling the `social-media-poster1.webp` file into the deployment build. Because the project's root is mapped to `public` inside `vite.config.js`, creating a `public/images/` directory *inside* the existing `/public/` root forces Vite to blindly copy the asset into the final `dist/` block as a static file, directly satisfying the absolute `https://clawmotus.com/images/` OG requirement.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Push SEO changes to main branch and instruct user on Google Search Console mechanics.
+
 ## 2026-02-24 | Session 54
 
 ### Started
