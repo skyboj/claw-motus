@@ -61,17 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
 
-                // Autoplay video for active section (optimization)
-                const video = entry.target.querySelector('video');
-                if (video && !isMobile) {
-                    video.play().catch(e => console.warn("Autoplay prevented:", e));
-                }
+                // Autoplay visible videos for active section
+                const videos = entry.target.querySelectorAll('video');
+                videos.forEach(video => {
+                    if (window.getComputedStyle(video).display !== 'none') {
+                        video.play().catch(e => console.warn("Autoplay prevented:", e));
+                    }
+                });
             } else {
-                // Pause video when out of viewport
-                const video = entry.target.querySelector('video');
-                if (video) {
+                // Pause all videos when out of viewport to save resources
+                const videos = entry.target.querySelectorAll('video');
+                videos.forEach(video => {
                     video.pause();
-                }
+                });
             }
         });
     }, observerOptions);

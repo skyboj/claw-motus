@@ -1,5 +1,25 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 58
+
+### Started
+- TASK-077: Fix Mobile Layout and Autoplay Issues
+
+### Completed
+- `public/js/main.js`:61-75 — Removed `&& !isMobile` restriction on the IntersectionObserver `.play()` call. Upgraded to `querySelectorAll('video')` with a `getComputedStyle(video).display !== 'none'` check so it properly iterates and selectively awakens hidden desktop/mobile instances.
+- `public/css/main.css`:177-178 — Appended `background-size: cover; background-position: center;` to `.gallery-card-inner` so images scale smartly inside the cards.
+- `public/css/main.css`:1044-1052 — Appended scoped `#live-events .gallery-card` landscape overrides. Defined a strict `height: 160px` wrapper on top of the native `286px` width, instantly crafting a perfect 16:9 cinematic aspect ratio that kills the aggressive portrait cropping.
+
+### Decisions (and why)
+- **IntersectionObserver Upgrade:** The user reported Social Media videos looked like still images on mobile. The previous logic exclusively targeted `if (video && !isMobile)`, completely stripping mobile browsers of `.play()` rights even if iOS allows muted auto-playback! Furthermore, because Social Media runs two distinct `<video>` nodes for Desktop/Mobile responsive streams, the vanilla `querySelector('video')` *always* fetched the first node. This meant it was attempting to play the hidden mobile video while the user was on Desktop, and leaving the visible Desktop video playing endlessly off-screen! `querySelectorAll` fixes this memory leak.
+- **Aspect Ratio Correction:** The user complained about the Live Event posters feeling completely cropped. I traced this to `.gallery-card` blindly pulling properties from the Hero Section layout, which was structurally hardcoded for 286x374 portrait images. Funneling horizontal 1920x1080 frames into that stripped 60% of their horizontal edges. By defining the CSS height constraint specifically in `#live-events`, the box perfectly frames the landscape pictures while still remaining uniform across the `1024px` horizontal marquee animation track.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Push Hotfix to Staging & Main and notify user.
+
 ## 2026-02-24 | Session 57
 
 ### Started

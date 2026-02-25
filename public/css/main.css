@@ -174,6 +174,8 @@ section.panel {
   height: 100%;
   border-radius: 18px;
   background-color: #333;
+  background-size: cover;
+  background-position: center;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   overflow: hidden;
@@ -1040,6 +1042,16 @@ textarea.form-control {
   #live-events .panel-content {
     align-self: auto;
     margin-bottom: 0;
+  }
+
+  /* Force landscape mode 16:9 on live event video poster cards */
+  #live-events .gallery-card {
+    height: 160px;
+    margin: auto 0;
+  }
+
+  #live-events .gallery-card.offset-y {
+    margin-top: calc(50% + 50px);
   }
 
   #social-media .panel-content {
