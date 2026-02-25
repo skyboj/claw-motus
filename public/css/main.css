@@ -1044,14 +1044,20 @@ textarea.form-control {
     margin-bottom: 0;
   }
 
-  /* Force landscape mode 16:9 on live event video poster cards */
+  /* Force vertical portrait mode 9:16 on live event video poster cards matching native 720x1196 resolution */
+  #live-events .bg-video-wrapper {
+    min-height: 550px;
+    height: 60vh;
+  }
+
   #live-events .gallery-card {
-    height: 160px;
+    height: auto;
+    aspect-ratio: 720 / 1196;
     margin: auto 0;
   }
 
   #live-events .gallery-card.offset-y {
-    margin-top: calc(50% + 50px);
+    margin-top: 60px;
   }
 
   #social-media .panel-content {

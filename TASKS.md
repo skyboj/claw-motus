@@ -77,3 +77,4 @@
 - [x] TASK-075: Debug Firebase 404 errors on Production
 - [x] TASK-076: Resolve GitHub Secret Scanning Alert
 - [x] TASK-077: Fix Mobile Layout and Autoplay Issues
+- [x] TASK-078: Match Live Events Gallery Image Proportions

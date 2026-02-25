@@ -1,5 +1,22 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 59
+
+### Started
+- TASK-078: Match Live Events Gallery Image Proportions
+
+### Completed
+- `public/css/main.css`:1044-1055 — Purged the previous `160px` 16:9 landscape override for Live Events mobile posters. Restored the native portrait orientation by applying `height: auto; aspect-ratio: 720 / 1196;`. Expanded `.bg-video-wrapper` to `min-height: 550px` to prevent vertical overflow clipping.
+
+### Decisions (and why)
+- **Image Resolution Mapping:** The user correctly pointed out the Live Event gallery cards looked horizontal and chopped off. A terminal inspection with `sips -g pixelWidth -g pixelHeight` verified the raw `live-events-poster1.webp` files export precisely at `720x1196` pixels (a vertical 9:16 layout). The CSS has been hardcoded with exactly `aspect-ratio: 720 / 1196` to guarantee the framework draws an identical box that refuses to crop regardless of how much it's scaled on tiny devices.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Push fix to GitHub and Firebase CI.
+
 ## 2026-02-24 | Session 58
 
 ### Started
