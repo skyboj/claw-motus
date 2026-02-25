@@ -69,3 +69,4 @@
 - [x] TASK-068: Verify and commit new optimized video assets
 - [x] TASK-069: Build, commit, and push changes to staging
 - [x] TASK-070: Debug missing video files on staging (GitHub Pages 404s) and JS ReferenceError
+- [x] TASK-072: Separate backup assets from production build on main

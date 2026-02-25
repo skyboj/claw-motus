@@ -1,23 +1,43 @@
 # WAL — Project State Journal
 
-## 2026-02-24 | Session 51
+## 2026-02-24 | Session 53
 
 ### Started
-- TASK-070: Debug missing video files and JS errors on staging
+- TASK-072: Separate backup assets from production build on main
 
 ### Completed
-- `index.html`: Refactored all absolute paths (`/videos/`, `/images/`, `/css/`, `/js/`) to relative paths (`videos/`, `images/`, `css/`, `js/`).
-- `js/main.js`:79 — Defined `const sections = document.querySelectorAll('section.panel');` directly above the `sections.forEach` observer initialization to resolve an Uncaught ReferenceError.
+- Transferred all heavy `.mov` original camera footage and uncompressed video sources out of the Vite compilable `/public/videos/sources/` directory.
+- Relocated files to a new repository root folder `/sources/` to act as an offline backup that Git tracks but Firebase/GitHub Pages CI deployment ignores.
+- Executed `git rm -r public/videos/sources/` and `git add sources/` to sync restructuring with the origin `staging` branch.
 
 ### Decisions (and why)
-- **Pathing Fix:** Vite builds correctly inject the `--base=/claw-motus/` argument into *relative* paths for GitHub Pages subfolder deployment. However, it explicitly ignores user-defined absolute path roots starting with `/`. This resulted in the staging site trying to load `skyboj.github.io/videos/` instead of `skyboj.github.io/claw-motus/videos/`, producing 404s for all dynamically sourced DOM media. Using relative paths guarantees Vite compiles the correct production URLs.
-- **JS Error Fix:** The IntersectionObserver logic used to trigger nav highlighting and autoplay videos was trying to attach to a `sections` array that had never been queried from the DOM, causing a total script crash on load.
+- **Firebase/Vite Quota Management:** The User correctly identified that explicitly uploading gigabytes of `.mov` source files that the live HTML never natively references completely exhausts Firebase Hosting storage caps for no functional reason. By simply moving the raw media assets from inside the `public/` directory (which `vite.config.js` blindly packs into `dist/`) to the repository root level (`/claw-motus/sources/`), the assets are perfectly tracked by GitHub's massive version control capabilities as safe backups while being physically invisible to the frontend CI deployment builder.
 
 ### Questions / REVIEW markers
 None.
 
 ### Next
-- Push fixes to staging pipeline.
+- Push directory restructure to Git.
+
+## 2026-02-24 | Session 52
+
+### Started
+- TASK-071: Re-investigate missing video files on staging (GitHub Pages 404s)
+
+### Completed
+- `public/videos/`: Added and committed the raw `.mp4`, `.webm`, and `sources/*.mov` files that were present locally but untracked by Git.
+- Pushed ~318MB of media assets to the `staging` branch to ensure Vite has the files available during the GitHub Action runner build step.
+
+### Decisions (and why)
+- **Root Cause of continuing 404s:** While the previous pathing fixes (converting absolute to relative URLs) were necessary for Vite's GitHub Pages `--base` injection, the core reason the videos *still* failed to load natively was because the user's manual optimizations to `public/videos/` were never explicitly tracked in Git. Thus, when the previous staging commits were pushed upstream, the video files were physically missing from the repository. Without the source files present, Vite's CI compiler naturally ignored the HTML `<source>` tags and failed to hash/export any video assets to the `dist/` branch, defaulting to dead URL strings. Pushing the untracked files resolves the CI pipeline vacuum.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- User to review staging deployment once GitHub Actions finishes the large media build.
+
+## 2026-02-24 | Session 51
 
 ## 2026-02-24 | Session 50
 
