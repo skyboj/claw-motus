@@ -1,5 +1,23 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 54
+
+### Started
+- TASK-073: Merge staging to main and deploy to production (Firebase)
+
+### Completed
+- Merged `staging` branch into `main`. This integrates all recent optimization work (asset separation, WebP compression, `<picture>` responsive implementation, Vite pathing bug fixes, SEO enhancements, and the new `/sources/` root structure).
+- Pushed `main` to origin to trigger the `.github/workflows/firebase-hosting-merge.yml` pipeline.
+
+### Decisions (and why)
+- **Deployment Streamlining:** The user confirmed all visual and architectural changes performed on `staging` are approved for production. The fast-forward merge instantly syncs `main` to the staging state, retaining the existing Firebase deployment CI without needing custom pipeline configurations. Since Vite ignores the `/sources/` directory, pushing this merge will respect Firebase's tight hosting limits.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Verify successful Firebase live deployment.
+
 ## 2026-02-24 | Session 53
 
 ### Started
