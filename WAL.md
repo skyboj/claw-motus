@@ -1,5 +1,42 @@
 # WAL — Project State Journal
 
+## 2026-02-24 | Session 57
+
+### Started
+- TASK-076: Resolve GitHub Secret Scanning Alert
+
+### Completed
+- `mcp-server/node_modules/`: Executed `git rm -r --cached` to permanently drop the thousands of dependencies that were accidentally committed during the `feat(TASK-002)` push.
+- `.gitignore`: Generated a standard Node.js exclusion template to block any future `node_modules/` drops or `.env` credential leaks.
+
+### Decisions (and why)
+- **False Positive Secret Remediation:** GitHub Advanced Security flagged `whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw`. I traced this back to `mcp-server/node_modules/svix/src/webhook.test.ts`. This proved the leaked secret was just a dummy string injected by the `svix` package developers for internal unit testing, posing exactly 0 risk to production Stripe infrastructure. Removing `node_modules` from Git tracking immediately resolves the architectural bloat, forces the false-positive scanner out of scope, and shrinks the repository footprint instantly.
+
+### Questions / REVIEW markers
+- User advised to manually "Close as False Positive" in GitHub UI since historical scans are permanently cached on old commits.
+
+### Next
+- Push cleanup changes and finalize security audit.
+
+## 2026-02-24 | Session 56
+
+### Started
+- TASK-075: Debug Firebase 404 errors on Production
+
+### Completed
+- `vite.config.js`:1-10 — Refactored Vite build `outDir` to use Node `path.resolve(__dirname, 'dist')`.
+- Root filesystem: Moved `public/sitemap.xml` and `public/robots.txt` into `public/public/` to force Vite to export them as raw static assets into the final `dist` folder.
+
+### Decisions (and why)
+- **Firebase Deployment Pathing Fix:** The live Firebase production site broke with an explicit "Page Not Found / no index.html" error. Investigation of the GitHub Action logs revealed Vite natively deployed its build to `../dist`. During local development, this equated to the repository root. However, during CI checkout, `../dist` pushed the built artifacts completely outside the working directory, leaving the repository cleanly empty. `firebase deploy` then uploaded the 0-file repository to the cloud. Using Node's `path` library pins the output directly to the current working environment structure (`/home/runner/work/...`), guaranteeing Firebase finds the `./dist` folder.
+- **Sitemap Exclusions:** The Google Search Console 404 error occurred because Vite natively ignores raw `xml` and `txt` files sitting in the root. Moving them into a nested folder identical to the configured `root: 'public'` instructs Vite's static handler to blind-copy the assets into the final output root.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Verify GitHub Action Firebase Deploy runs successfully and GSC indexes the sitemap.
+
 ## 2026-02-24 | Session 55
 
 ### Started

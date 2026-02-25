@@ -74,3 +74,5 @@
 
 ## Normal priority
 - [x] TASK-074: Update SEO OpenGraph preview image and expand JSON-LD services schema
+- [x] TASK-075: Debug Firebase 404 errors on Production
+- [x] TASK-076: Resolve GitHub Secret Scanning Alert
