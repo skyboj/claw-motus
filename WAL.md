@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-26 | Session 62
+
+### Started
+- TASK-081: Upgrade Resend SDK from v3.5.0 to v6.9.2
+
+### Completed
+- TASK-081: Upgrade Resend SDK from v3.5.0 to v6.9.2
+  - `functions/package.json`:22 — Changed `resend` dependency from `^3.5.0` to `^6.9.2`.
+  - `functions/package-lock.json` — Updated lockfile with resolved v6.9.2 dependency tree.
+  - No changes to `functions/index.js` — the `new Resend()` constructor and `resend.emails.send()` API are identical across v3 and v6.
+- Deployed updated function to Firebase Cloud Functions.
+
+### Decisions (and why)
+- `functions/package.json`:22 — Resend dashboard flagged Node.js SDK v3.5.0 as outdated with a recommendation to upgrade to v6.9.2. The user approved the dependency upgrade. Reviewed `functions/index.js` and confirmed the code only uses `new Resend(apiKey)` and `resend.emails.send({...})`, which are stable across all major versions. No code modifications required.
+
+### Questions / REVIEW markers
+- Firebase CLI also warned that Node.js 20 runtime will be deprecated on 2026-04-30. Created no task for this yet — will address if user requests.
+- Firebase CLI warned `firebase-functions` package is outdated. Created no task — separate upgrade with breaking changes.
+
+### Next
+- Commit and push to staging branch.
+
 ## 2026-02-26 | Session 61
 
 ### Started

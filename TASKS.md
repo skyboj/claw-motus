@@ -80,3 +80,4 @@
 - [x] TASK-078: Match Live Events Gallery Image Proportions
 - [x] TASK-079: Add bottom padding to Quote section on mobile
 - [x] TASK-080: Add favicon to the site and deploy
+- [x] TASK-081: Upgrade Resend SDK from v3.5.0 to v6.9.2
