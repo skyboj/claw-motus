@@ -79,3 +79,4 @@
 - [x] TASK-077: Fix Mobile Layout and Autoplay Issues
 - [x] TASK-078: Match Live Events Gallery Image Proportions
 - [x] TASK-079: Add bottom padding to Quote section on mobile
+- [x] TASK-080: Add favicon to the site and deploy

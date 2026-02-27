@@ -1,5 +1,27 @@
 # WAL — Project State Journal
 
+## 2026-02-26 | Session 61
+
+### Started
+- TASK-080: Add favicon to the site and deploy
+
+### Completed
+- TASK-080: Add favicon to the site and deploy
+  - `public/index.html`:30-31 — Added `<link rel="icon" type="image/png" href="images/favicon.png" />` to the `<head>` block.
+  - `public/public/images/favicon.png` — Copied the user-provided `favicon.png` into the Vite static asset mirror directory so it gets copied to `dist/images/` during build.
+  - `.firebaserc`:3 — Fixed project ID from `clawmotus-default-id` to `claw-motus` (was causing `firebase deploy` to fail locally).
+- Built via Vite and deployed to Firebase Hosting.
+
+### Decisions (and why)
+- `.firebaserc`:3 — The default project alias pointed to `clawmotus-default-id`, a non-existent project. Corrected to `claw-motus` to match the actual GCP project, per `firebase projects:list`.
+- `public/public/images/favicon.png` — Followed the same Vite static asset pattern established in TASK-074/075 (sitemap, OG image): files placed in `public/public/` are blindly copied into `dist/` by Vite since the project root is `public`.
+
+### Questions / REVIEW markers
+None.
+
+### Next
+- Commit and push changes to git.
+
 ## 2026-02-24 | Session 60
 
 ### Started
